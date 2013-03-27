@@ -155,7 +155,7 @@ void Board::move(int tile)
 	if( a == b+sqrt(size_) || a == b-sqrt(size_) || a == b+1 || a == b-1)
 	{
 	//Checks if numbers are on the "edge"
-		if((a%dim == 0 && b%dim == 1) || (b%dim == 0 && a%dim == 1))
+		if((a%dim == 0 && b%dim == dim-1) || (b%dim == 0 && a%dim == dim-1))
 		{
 			cout << "Incorrect tile movement." << endl;
 		}
