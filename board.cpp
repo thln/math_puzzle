@@ -28,7 +28,7 @@ Board::Board()
  *  @param numInitMoves Number of tile moves to attempt to scramble the board
  *  @param seed Use to seed the random number generator (srand) 
  */
-Board::Board(int size, int numInitMoves, int seed )
+Board::Board(int size, int numInitMoves, int seed)
 {
   size_ = size;
   tiles_ = new int[size_];
@@ -104,6 +104,8 @@ Board::Board(int *tiles, int size)
 //Swaps the blank with the specified tile
 void Board::move(int tile)
 {
+  int dim = static_cast<int>(sqrt(size_));
+
 	//checking if tile is in the game or not
 	if(tile<0 || tile>(size_-1))
 	{
@@ -135,7 +137,7 @@ void Board::move(int tile)
 	//looping through all tiles
 	//variables keeping track of tiles to swap
 	int a, b;
-	for(init i=0; i<size_; i++)
+	for(int i=0; i<size_; i++)
 	{
 		//finding shown tile
 		if(tile == tiles_[i])
@@ -149,8 +151,19 @@ void Board::move(int tile)
 		}
 		
 	}
-	tiles_[a] = 0;
-	tiles_[b] = tile;
+	//Checks if two tiles are next to each other
+	if( a == b+sqrt(size_) || a == b-sqrt(size_) || a == b+1 || a == b-1)
+	{
+	//Checks if numbers are on the "edge"
+		if((a%dim == 0 && b%dim == 1) || (b%dim == 0 && a%dim == 1))
+		{
+			cout << "Incorrect tile movement." << endl;
+		}
+		else{
+	 		tiles_[a] = 0;
+	 		tiles_[b] = tile;
+	 	}
+	}
 	}
 }
 
@@ -168,6 +181,88 @@ bool Board::solved()
   return true;
 }
 
+//Generates potential moves and returns new board
+//Key=tile, Value=Ptr to corresponding Board
+std::map<int, Board*> Board::potentialMoves()
+{
+ std::map<int, Board*> mymap;
+ int dim = static_cast<int>(sqrt(this->size_));
+ Board *Board1 = new Board(this->tiles_, this->size_);
+ Board *Board2 = new Board(this->tiles_, this->size_);
+ Board *Board3 = new Board(this->tiles_, this->size_);
+ Board *Board4 = new Board(this->tiles_, this->size_);
+
+//index where zero is
+int zeroIndex;
+//finds where the zeroIndex is
+ for(int i=0; i<this->size_; i++)
+ {
+ 	if(this->tiles_[i] == 0)
+ 	{
+ 		zeroIndex = i;
+ 		break;
+ 	}
+ }
+ //checking if 0 is on the right edge
+ if(zeroIndex%dim == 0)
+ {
+ 
+ }
+ else
+ {
+ 	Board1->move(zeroIndex+1);
+ 	mymap[zeroIndex+1] = Board1;
+ }
+ 
+ //checking if 0 is on the left edge
+ if(zeroIndex%dim == 1)
+ {
+ 
+ }
+ else
+ {
+ 	Board2->move(zeroIndex-1);
+ 	mymap[zeroIndex-1] = Board2;
+ } 
+ 
+ //checking if 0 is on the top row
+ if(zeroIndex < dim)
+ {
+ 
+ }
+ else
+ {
+ 	Board3->move(zeroIndex-3);
+ 	mymap[zeroIndex-3] = Board3;
+ } 
+ //checking if 0 is on the bottom row
+ if(zeroIndex > dim*(dim-1))
+ {
+ 
+ }
+ else
+ {
+ 	Board4->move(zeroIndex+3);
+ 	mymap[zeroIndex+3] = Board4;
+ } 
+
+	return mymap;
+}
+
+//Tile Accessor
+int* Board::getTiles()
+{
+	return tiles_;
+}
+
+//Size Accessor
+int Board::getSize()
+{
+	return size_;
+}
+
+//Operators
+//Checks if one board is less than another board
 bool Board::operator<(const Board& rhs) const
 {
   if(size_ < rhs.size_){
@@ -188,4 +283,50 @@ bool Board::operator<(const Board& rhs) const
   return val;
 }
 
+//Printing out the board game with this friend function
+std::ostream& operator<<(std::ostream &os, const Board &b)
+{
+  int dim = static_cast<int>(sqrt(b.size_));
+  
+	for(int i=0; i<b.size_; i++)
+	{
+	   if(i%dim == 0)
+	   {
+	    os << " " << endl;
+	   }
+	   os << b.tiles_[i] << setw(2);
+	}
+ return os;
+}
 
+//Checking if two boards are equal to each other
+bool Board::operator==(const Board& rhs) const
+{
+	if(size_ < rhs.size_){
+    	return false;
+    }
+    for(int i=0; i<size_; i++)
+    {
+    	if(tiles_[i] != rhs.tiles_[i])
+    	{
+    		return false;
+    	}
+    }
+    return true;
+}
+
+//Checking if two boards are not equal to each other
+bool Board::operator!=(const Board& rhs) const
+{
+	if(size_ < rhs.size_){
+      return true;
+    }
+    for(int i=0; i<size_; i++)
+    {
+    	if(tiles_[i] != rhs.tiles_[i])
+    	{
+    		return true;
+    	}
+    }
+    return false;
+}
