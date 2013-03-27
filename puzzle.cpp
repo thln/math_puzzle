@@ -24,9 +24,27 @@ int main(int argc, char *argv[])
 
   //**** Implement the gameplay here
 
+	cout << "Welcome to the Game!" << endl;
+	
+	while(!b.solved())
+	{
+		cout<<b<<endl;
+	
+		int answer;
+		cout << "Enter tile number to move or -1 for a cheat: " << endl;
+		cin>>answer;
+	
+		if(answer == -1)
+		{
+			cout << "No cheating!" << endl;
+		}
+		else
+		{
+			b.move(answer);
+		}
+	}
 
-
-
+	cout << "YOU WIN!" << endl;
 
 
 

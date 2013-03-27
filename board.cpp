@@ -294,7 +294,14 @@ std::ostream& operator<<(std::ostream &os, const Board &b)
 	   {
 	    os << " " << endl;
 	   }
-	   os << b.tiles_[i] << setw(2);
+	   if(b.tiles_[i] == 0)
+	   {
+	    os << " " << setw(2);
+	   }
+	   else
+	   {
+	    os << b.tiles_[i] << setw(2);
+	   }
 	}
  return os;
 }
