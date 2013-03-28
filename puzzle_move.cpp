@@ -1,10 +1,48 @@
 #include "puzzle_move.h"
 
+//Constructor for starting Board of an A* search
+PuzzleMove::PuzzleMove(Board &b)
+{
+	tileMove_ = 0;
+	g_ = 0;
+	h_ = 0;
+	b_ = NULL;
+	prev_ = NULL;
 
+}
 
+//Constructor for subsequent search boards
+// (i.e) like those returned by Board::potentialMoves()
+PuzzleMove::PuzzleMove(int tile, Board *b, PuzzleMove *Parent)
+{
+	tileMove_ = tile;
+	prev_ = Parent;
+	b_ = b;
+	b->g_ = Parent->g_ + 1;
+	h_ = 0;
+}
+
+//Destructor
+PuzzleMove::~PuzzleMove()
+{
+	delete b;
+	delete p;
+}
 
 
 // Compare to PuzzleMoves based on f distance (needed for priority queue
+bool PuzzleMove::operator==(const PuzzleMove& p) const
+{
+	if((g_ + h_) == (p.g_ + p.h_))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
 bool PuzzleMove::operator<(const PuzzleMove& p) const
 {
   if((g_ + h_) < (p.g_ + p.h_)){
@@ -17,6 +55,7 @@ bool PuzzleMove::operator<(const PuzzleMove& p) const
     return false;
   }
 }
+
 bool PuzzleMove::operator>(const PuzzleMove& p) const
 {
   if( (g_ + h_) > (p.g_ + p.h_) ){
