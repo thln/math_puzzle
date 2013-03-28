@@ -4,6 +4,7 @@
 #include "board.h"
 #include "puzzle_heur.h"
 #include "puzzle_solver.h"
+#include "pmminlist.h"
 
 using namespace std;
 
@@ -21,6 +22,21 @@ int main(int argc, char *argv[])
   seed = atoi(argv[3]);
 
   Board b(size,initMoves,seed);
+
+
+//Testing pmminlist
+/*
+PMMinList test;
+Board Board1;
+Board Board2;
+PuzzleMove *PM1= new PuzzleMove(Board1);
+PuzzleMove *PM2= new PuzzleMove(Board2);
+test.push(PM1);
+test.push(PM2);
+cout << test.top() << endl;
+test.pop();
+cout << test.top() << endl;
+*/
 
   //**** Implement the gameplay here
 

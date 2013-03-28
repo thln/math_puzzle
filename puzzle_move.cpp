@@ -18,15 +18,15 @@ PuzzleMove::PuzzleMove(int tile, Board *b, PuzzleMove *Parent)
 	tileMove_ = tile;
 	prev_ = Parent;
 	b_ = b;
-	b->g_ = Parent->g_ + 1;
+	g_++;
 	h_ = 0;
 }
 
 //Destructor
 PuzzleMove::~PuzzleMove()
 {
-	delete b;
-	delete p;
+	delete b_;
+	delete prev_;
 }
 
 
