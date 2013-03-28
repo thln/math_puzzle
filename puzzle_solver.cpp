@@ -44,16 +44,27 @@ int PuzzleSolver::run(PuzzleHeuristic *ph)
 		
 		if(move->b_->solved())
 		{
-		
+		//trace path backwards
+		break;
 		}
+		move->potentialMoves();
+		/* Generates potentialMoves (in a map, see what you can do next) 
+		For every potential move 's'
+		 - if 's' does not exist in Closed_Set(i.e. is a new move)
+		   - compute f value ( # of moves + heuristic)
+		   - add 's' board to Closed_Set (no longer new move)
+		   - add 's' to Open_List (will be continued later on)
+		   - increment number of expansions (expansions_++ so you know)
+		- forloop ends, because there is still a move (not solved) while continues
 		
+	finishes return solutionSet(??) */
 	
 	
 	}
 
 
 //return int
-	return;
+//	return;
 }
 
 //returns number of expansions
