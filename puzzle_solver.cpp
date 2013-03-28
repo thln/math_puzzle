@@ -44,7 +44,13 @@ int PuzzleSolver::run(PuzzleHeuristic *ph)
 		
 		if(move->b_->solved())
 		{
+		//PuzzleMove *temp = new PuzzleMove(mov
 		//trace path backwards
+		//** make a temp puzzle with current move.getTile, move, move->prev
+		//** add current move.getTile to solutions linked list
+		//** temp = temp->prev?
+		//** for loop until temp = StartState?
+		
 		break;
 		}
 		move->potentialMoves();
@@ -59,6 +65,8 @@ int PuzzleSolver::run(PuzzleHeuristic *ph)
 		
 	finishes return solutionSet(??) */
 	
+		//**Possible algorithm
+		//**
 	
 	}
 
