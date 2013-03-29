@@ -28,6 +28,7 @@ class PuzzleSolver
   int run(PuzzleHeuristic *ph);
 
   //**** Return the solution List
+  void printSolutions();
  
 
   // Return how many expansions were performed in the search
@@ -37,6 +38,7 @@ class PuzzleSolver
   Board b_;
   int expansions_;
   //**** Declare a List to store your solutions sequence of tiles to move
+  MyList<int> Solutions;            //stores solution set
 };
 
 #endif

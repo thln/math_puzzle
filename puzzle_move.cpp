@@ -6,7 +6,7 @@ PuzzleMove::PuzzleMove(Board &b)
 	tileMove_ = 0;
 	g_ = 0;
 	h_ = 0;
-	b_ = NULL;
+	b_ = new Board(b);
 	prev_ = NULL;
 
 }
@@ -17,8 +17,8 @@ PuzzleMove::PuzzleMove(int tile, Board *b, PuzzleMove *Parent)
 {
 	tileMove_ = tile;
 	prev_ = Parent;
-	b_ = b;
-	g_++;
+	b_ = new Board(*b);
+	g_ = Parent->g_ + 1;
 	h_ = 0;
 }
 

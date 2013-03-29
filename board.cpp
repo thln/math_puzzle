@@ -224,7 +224,7 @@ int zeroIndex;
  else
  {
  	Board1->move(zeroIndex+1);
- 	mymap[zeroIndex+1] = Board1;
+ 	mymap[this->tiles_[zeroIndex+1]] = Board1;
  }
  
  //checking if 0 is on the left edge
@@ -235,7 +235,7 @@ int zeroIndex;
  else
  {
  	Board2->move(zeroIndex-1);
- 	mymap[zeroIndex-1] = Board2;
+ 	mymap[this->tiles_[zeroIndex-1]] = Board2;
  } 
  
  //checking if 0 is on the top row
@@ -245,8 +245,8 @@ int zeroIndex;
  }
  else
  {
- 	Board3->move(zeroIndex-3);
- 	mymap[zeroIndex-3] = Board3;
+ 	Board3->move(zeroIndex-dim);
+ 	mymap[this->tiles_[zeroIndex-dim]] = Board3;
  } 
  //checking if 0 is on the bottom row
  if(zeroIndex > dim*(dim-1))
@@ -255,8 +255,8 @@ int zeroIndex;
  }
  else
  {
- 	Board4->move(zeroIndex+3);
- 	mymap[zeroIndex+3] = Board4;
+ 	Board4->move(zeroIndex+dim);
+ 	mymap[this->tiles_[zeroIndex+dim]] = Board4;
  } 
 
 	return mymap;

@@ -41,6 +41,8 @@ cout << test.top() << endl;
   //**** Implement the gameplay here
 
 	cout << "Welcome to the Game!" << endl;
+
+	ManhattanHeuristic *MH = new ManhattanHeuristic;
 	
 	while(!b.solved())
 	{
@@ -49,10 +51,21 @@ cout << test.top() << endl;
 		int answer;
 		cout << "Enter tile number to move or -1 for a cheat: " << endl;
 		cin>>answer;
+
+//****MAJOR PROBLEMS
+//* 1 Goes straight into the "solved" if statement and then breaks
+//* 2 Does not push back the tiles into the Solutions linked list
+//* 3 Switches the number 1 with a random number (modifies original gameboard)
+//* 4 Apparently, if it skips the if statement, there is a floating point exception (core dumped)
 	
 		if(answer == -1)
 		{
-			cout << "No cheating!" << endl;
+			PuzzleSolver Answer = PuzzleSolver(b);
+			cout<< "LALA1" << endl;
+			Answer.run(MH);
+			cout<< "LALA1" << endl;
+			Answer.printSolutions();
+			cout<< "LALA1" << endl;
 		}
 		else
 		{

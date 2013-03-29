@@ -10,6 +10,7 @@ using namespace std;
 //Constructor
 PuzzleSolver::PuzzleSolver(const Board &b)
 {
+//changed to dynamic
 	b_ = b;
 	expansions_ = 0;
 
@@ -21,13 +22,23 @@ PuzzleSolver::~PuzzleSolver()
 
 }
 
+//Printing or "returning" the function
+void PuzzleSolver::printSolutions()
+{
+	cout << "Try: ";
+	for(int i=0; i< Solutions.getSize(); i++)
+	{
+		cout << " " << Solutions[i] << " ";
+	}
+	cout << " " << endl;
+}
+
 //Runs the A Star Algorithm
 int PuzzleSolver::run(PuzzleHeuristic *ph)
 {
 	PMMinList Open_List;              //stores new, unexplored moves
 	BoardSet Closed_Set;              //stores old boards
 	vector<PuzzleMove*> Garbage_List; //stores old moves
-	MyList<int> Solutions;            //stores solution set
 
 	PuzzleMove *StartState = new PuzzleMove(b_);
 
@@ -35,37 +46,81 @@ int PuzzleSolver::run(PuzzleHeuristic *ph)
 	Open_List.push(StartState);
 	Closed_Set.insert(StartState->b_);
 	Garbage_List.push_back(StartState);
+	
+	cout<< "LALA2" << endl;
 
 	while(!Open_List.empty())
 	{
+	
 		PuzzleMove *move = Open_List.top();
 		Open_List.pop();
-		Closed_Set.insert(move->b_);
 		Garbage_List.push_back(move);
+	
+		cout<< "LALA3" << endl;
 		
-		if(move->b_->solved())
+		if(!(move->b_->solved()))
 		{
-		//PuzzleMove *temp = new PuzzleMove(mov
-		//trace path backwards
-		//** make a temp puzzle with current move.getTile, move, move->prev
-		//** add current move.getTile to solutions linked list
-		//** temp = temp->prev?
-		//** for loop until temp = StartState?
+
+		cout <<"Solved" << endl;
+		cout<< "LALA4" << endl;
+			//PuzzleMove *temp = new PuzzleMove(mov
+			//trace path backwards
+			//** make a temp puzzle with current move.getTile, move, move->prev
+			//** add current move.getTile to solutions linked list
+			//** temp = temp->prev?
+			//** for loop until temp = StartState?
+			
+		cout<< "LALA4" << endl;			
 		
-		PuzzleMove *temp = new PuzzleMove(move->tileMove_, move->b_, move->prev_);
-		//std::list<PuzzleMove*>::iterator it = temp;
-		//std::list<PuzzleMove*>::iterator it = ;
-		//for(it = move; it != StartState; ++it)
-		while(temp != StartState)
-		{
-			Solutions.push_back(temp->tileMove_);
-			temp = temp->prev_;
+			PuzzleMove *temp = move;
+
+		cout<< "LALA5" << endl;
+
+			//std::list<PuzzleMove*>::iterator it = temp;
+			//std::list<PuzzleMove*>::iterator it = ;
+			//for(it = move; it != StartState; ++it)
+			while(temp->prev_ != NULL)
+			{
+		cout<< "LALA18!!!!!!!" << endl;
+				Solutions.push_back(temp->tileMove_);
+				temp = temp->prev_;
+			}
+		cout<< "LALA5!!!!!!!" << endl;		
+			Solutions.push_back(StartState->tileMove_);
+			break;
 		}
 		
-		Solutions.push_back(StartState->tileMove_);
-		break;
+		cout<< "LALA5!!" << endl;
+		
+		//makes a map of the current board's potential moves/boards
+		map<int, Board*> potentialmap = move->b_->potentialMoves();
+		//travels through the map 
+		
+		cout<< "LALA5" << endl;
+		
+		map<int, Board*>::iterator it = potentialmap.begin();
+		for(it = potentialmap.begin(); it != potentialmap.end(); ++it)
+		{
+		cout<< "LALA6" << endl;
+			//if(*(it.second())
+			//if the value of the current iterator IS NOT in the Closed_Set it will return Closed_Set.end()
+			//therefore if the current move(it) is new and must be explored
+			if(Closed_Set.find(it->second) == Closed_Set.end())
+			{
+			
+			cout<< "LALA7" << endl;
+
+			Closed_Set.insert(it->second);
+			PuzzleMove *freshMove = new PuzzleMove(it->first, it->second, move);
+			freshMove->h_ = ph->compute(it->second->getTiles(), it->second->getSize());
+			freshMove->prev_ = move;
+			Open_List.push(freshMove);
+			
+			cout << expansions_ << endl;
+			expansions_++;
+			}
 		}
-		move->b_->potentialMoves();
+		
 		/* Generates potentialMoves (in a map, see what you can do next) 
 		For every potential move 's'
 		 - if 's' does not exist in Closed_Set(i.e. is a new move)
@@ -79,10 +134,10 @@ int PuzzleSolver::run(PuzzleHeuristic *ph)
 	
 		//**Possible algorithm
 		//**
-	
+
 	}
 
-
+return Solutions.getSize();	
 //return int
 //	return;
 }
