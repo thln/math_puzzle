@@ -25,12 +25,14 @@ PuzzleSolver::~PuzzleSolver()
 //Printing or "returning" the function
 void PuzzleSolver::printSolutions()
 {
-	cout << "Try: ";
+	cout << " " << endl;
+	cout << "Try this sequence: ";
 	for(int i=0; i< Solutions.getSize(); i++)
 	{
 		cout << " " << Solutions[i] << " ";
 	}
 	cout << " " << endl;
+	cout << "(Expansions = " << expansions_ << ")" << endl;
 }
 
 //Runs the A Star Algorithm
