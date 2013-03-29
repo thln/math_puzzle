@@ -24,10 +24,10 @@ PuzzleSolver::~PuzzleSolver()
 //Runs the A Star Algorithm
 int PuzzleSolver::run(PuzzleHeuristic *ph)
 {
-	PMMinList Open_List;
-	BoardSet Closed_Set;
-	vector<PuzzleMove*> Garbage_List;
-	MyList<int> Solutions;
+	PMMinList Open_List;              //stores new, unexplored moves
+	BoardSet Closed_Set;              //stores old boards
+	vector<PuzzleMove*> Garbage_List; //stores old moves
+	MyList<int> Solutions;            //stores solution set
 
 	PuzzleMove *StartState = new PuzzleMove(b_);
 
@@ -38,9 +38,10 @@ int PuzzleSolver::run(PuzzleHeuristic *ph)
 
 	while(!Open_List.empty())
 	{
-		PuzzleMove move = Open_List.top();
+		PuzzleMove *move = Open_List.top();
 		Open_List.pop();
 		Closed_Set.insert(move->b_);
+		Garbage_List.push_back(move);
 		
 		if(move->b_->solved())
 		{
@@ -51,9 +52,20 @@ int PuzzleSolver::run(PuzzleHeuristic *ph)
 		//** temp = temp->prev?
 		//** for loop until temp = StartState?
 		
+		PuzzleMove *temp = new PuzzleMove(move->tileMove_, move->b_, move->prev_);
+		//std::list<PuzzleMove*>::iterator it = temp;
+		//std::list<PuzzleMove*>::iterator it = ;
+		//for(it = move; it != StartState; ++it)
+		while(temp != StartState)
+		{
+			Solutions.push_back(temp->tileMove_);
+			temp = temp->prev_;
+		}
+		
+		Solutions.push_back(StartState->tileMove_);
 		break;
 		}
-		move->potentialMoves();
+		move->b_->potentialMoves();
 		/* Generates potentialMoves (in a map, see what you can do next) 
 		For every potential move 's'
 		 - if 's' does not exist in Closed_Set(i.e. is a new move)

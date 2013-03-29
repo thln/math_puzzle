@@ -30,6 +30,8 @@ PuzzleMove::~PuzzleMove()
 }
 
 
+
+
 // Compare to PuzzleMoves based on f distance (needed for priority queue
 bool PuzzleMove::operator==(const PuzzleMove& p) const
 {

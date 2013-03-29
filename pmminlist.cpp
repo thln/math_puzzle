@@ -36,18 +36,18 @@ void PMMinList::push(PuzzleMove* pm)
 	if(!slist_.empty())
 	{
 		//if the value is the biggest one, just add to the end
-		if(*pm > slist_.end())
+		if(*pm>*(*(slist_.end())))
 		{
 			slist_.push_back(pm);
 		}
 		//if value is somewhere inbetween
-		else if
+		else
 		{
 			//traversing list
 			for(it = slist_.begin(); it != slist_.end(); ++it)
 			{
 				//if next value is larger than current value pm, insert right before
-				if(*it>*pm)
+				if(*(*it)>*pm)
 				{
 					slist_.insert(it, pm);
 					break;
