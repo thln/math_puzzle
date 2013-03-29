@@ -43,6 +43,7 @@ cout << test.top() << endl;
 	cout << "Welcome to the Game!" << endl;
 
 	ManhattanHeuristic *MH = new ManhattanHeuristic;
+//	OutOfPlaceHeuristic *OOPH = new OutOfPlaceHeuristic;
 	
 	while(!b.solved())
 	{
