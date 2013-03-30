@@ -92,18 +92,19 @@ int PuzzleSolver::run(PuzzleHeuristic *ph)
 			break;
 		}
 		
-		cout<< "LALA5!!" << endl;
+		cout<< "LALA6!!" << endl;
 		
 		//makes a map of the current board's potential moves/boards
-		map<int, Board*> potentialmap = move->b_->potentialMoves();
+		map<int, Board*> potentialmap ((move->b_->potentialMoves()));
 		//travels through the map 
 		
 		cout<< "LALA5" << endl;
 		
 		map<int, Board*>::iterator it = potentialmap.begin();
+		//Something wrong with forloop, it's not iterating
 		for(it = potentialmap.begin(); it != potentialmap.end(); ++it)
 		{
-		cout<< "LALA6" << endl;
+		cout<< "LALA77" << endl;
 			//if(*(it.second())
 			//if the value of the current iterator IS NOT in the Closed_Set it will return Closed_Set.end()
 			//therefore if the current move(it) is new and must be explored

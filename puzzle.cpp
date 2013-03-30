@@ -61,11 +61,11 @@ cout << test.top() << endl;
 	
 		if(answer == -1)
 		{
-			PuzzleSolver Answer = PuzzleSolver(b);
+			PuzzleSolver *Answer = new PuzzleSolver(b);
 			cout<< "LALA1" << endl;
-			Answer.run(MH);
+			Answer->run(MH);
 			cout<< "LALA1" << endl;
-			Answer.printSolutions();
+			Answer->printSolutions();
 			cout<< "LALA1" << endl;
 		}
 		else
