@@ -54,10 +54,11 @@ cout << test.top() << endl;
 		cin>>answer;
 
 //****MAJOR PROBLEMS
-//* 1 Goes straight into the "solved" if statement and then breaks
-//* 2 Does not push back the tiles into the Solutions linked list
-//* 3 Switches the number 1 with a random number (modifies original gameboard)
-//* 4 Apparently, if it skips the if statement, there is a floating point exception (core dumped)
+//* last problem - Is adding 0's to the solutions vector
+//!!* 1 Goes straight into the "solved" if statement and then breaks
+//!!* 2 Does not push back the tiles into the Solutions linked list
+//!!* 3 Switches the number 1 with a random number (modifies original gameboard)
+//!!* 4 Apparently, if it skips the if statement, there is a floating point exception (core dumped)
 	
 		if(answer == -1)
 		{

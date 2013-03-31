@@ -10,10 +10,8 @@ using namespace std;
 //Constructor
 PuzzleSolver::PuzzleSolver(const Board &b)
 {
-//changed to dynamic
 	b_ = b;
 	expansions_ = 0;
-
 }
 
 //Destructor
@@ -27,7 +25,7 @@ void PuzzleSolver::printSolutions()
 {
 	cout << " " << endl;
 	cout << "Try this sequence: ";
-	for(int i=0; i< Solutions.getSize(); i++)
+	for(int i=(Solutions.getSize()-1); i >= 0; i--)
 	{
 		cout << " " << Solutions[i] << " ";
 	}
@@ -38,18 +36,23 @@ void PuzzleSolver::printSolutions()
 //Runs the A Star Algorithm
 int PuzzleSolver::run(PuzzleHeuristic *ph)
 {
+
 	PMMinList Open_List;              //stores new, unexplored moves
 	BoardSet Closed_Set;              //stores old boards
 	vector<PuzzleMove*> Garbage_List; //stores old moves
 
 	PuzzleMove *StartState = new PuzzleMove(b_);
+	
+	cout << "Testing StartState board!!!!!!" << endl;
+	cout<<*(StartState->b_) << endl;
 
 	//Adding to open list and closed set
 	Open_List.push(StartState);
 	Closed_Set.insert(StartState->b_);
 	Garbage_List.push_back(StartState);
+	map<int, Board*> potentialmap;
 	
-	cout<< "LALA2" << endl;
+//	cout<< "LALA2" << endl;
 
 	while(!Open_List.empty())
 	{
@@ -58,13 +61,15 @@ int PuzzleSolver::run(PuzzleHeuristic *ph)
 		Open_List.pop();
 		Garbage_List.push_back(move);
 	
-		cout<< "LALA3" << endl;
+//		cout<< "LALA3" << endl;
+		cout << "Testing Current Move board!!!!!!" << endl;
+		cout<<*(move->b_) << endl;
 		
-		if(!(move->b_->solved()))
+		if(move->b_->solved())
 		{
 
-		cout <<"Solved" << endl;
-		cout<< "LALA4" << endl;
+		cout <<"Solved!" << endl;
+//		cout<< "LALA4" << endl;
 			//PuzzleMove *temp = new PuzzleMove(mov
 			//trace path backwards
 			//** make a temp puzzle with current move.getTile, move, move->prev
@@ -72,55 +77,76 @@ int PuzzleSolver::run(PuzzleHeuristic *ph)
 			//** temp = temp->prev?
 			//** for loop until temp = StartState?
 			
-		cout<< "LALA4" << endl;			
+//		cout<< "LALA4" << endl;			
 		
-			PuzzleMove *temp = move;
+			//PuzzleMove *temp = move;
+		//PuzzleMove *temp = new PuzzleMove(*(move->b_));
+		PuzzleMove *temp = new PuzzleMove(move->tileMove_, move->b_, move->prev_);
+		
+		cout << "Testing Current Temp board!!!!!!" << endl;
+		cout<<*(temp->b_) << endl;
+		cout << "Temp's tileMove " << temp->tileMove_ << endl;
+		if(temp->prev_ == NULL)
+		{
+		cout << "temp is NULL" << endl;
+		}
+//		cout << "Temp's previous " << *(temp->prev_->b_) << endl;
 
-		cout<< "LALA5" << endl;
 
 			//std::list<PuzzleMove*>::iterator it = temp;
 			//std::list<PuzzleMove*>::iterator it = ;
 			//for(it = move; it != StartState; ++it)
 			while(temp->prev_ != NULL)
 			{
-		cout<< "LALA18!!!!!!!" << endl;
+		cout<< "Adding to Solutions List" << endl;
+		cout << "Temp's tileMove " << temp->tileMove_ << endl;
 				Solutions.push_back(temp->tileMove_);
 				temp = temp->prev_;
 			}
-		cout<< "LALA5!!!!!!!" << endl;		
-			Solutions.push_back(StartState->tileMove_);
+		//cout<< "Adding StartState's tileMove" << endl;
+		//necessary?		
+		//	Solutions.push_back(StartState->tileMove_);
 			break;
 		}
 		
-		cout<< "LALA6!!" << endl;
+		cout<< "Not Solved Yet" << endl;
+		
+		cout<<*(move->b_)<<endl;
 		
 		//makes a map of the current board's potential moves/boards
-		map<int, Board*> potentialmap ((move->b_->potentialMoves()));
+		potentialmap = move->b_->potentialMoves();
 		//travels through the map 
 		
-		cout<< "LALA5" << endl;
-		
-		map<int, Board*>::iterator it = potentialmap.begin();
+		cout<< "Going into forloop" << endl;
+		map<int, Board*>::iterator it;
+	//	it = potentialmap.begin();
+	
 		//Something wrong with forloop, it's not iterating
 		for(it = potentialmap.begin(); it != potentialmap.end(); ++it)
 		{
-		cout<< "LALA77" << endl;
+		cout<< "In ForLoop" << endl;
 			//if(*(it.second())
 			//if the value of the current iterator IS NOT in the Closed_Set it will return Closed_Set.end()
 			//therefore if the current move(it) is new and must be explored
 			if(Closed_Set.find(it->second) == Closed_Set.end())
 			{
 			
-			cout<< "LALA7" << endl;
+			cout<< "New Board" << endl;
 
 			Closed_Set.insert(it->second);
 			PuzzleMove *freshMove = new PuzzleMove(it->first, it->second, move);
 			freshMove->h_ = ph->compute(it->second->getTiles(), it->second->getSize());
-			freshMove->prev_ = move;
+			//freshMove->prev_ = move;
 			Open_List.push(freshMove);
 			
-			cout << expansions_ << endl;
+			cout << "Expansions Before: " << expansions_ << endl;
 			expansions_++;
+			cout << "Expansions After: " << expansions_ << endl;
+			}
+			else
+			{
+			cout << "Old Board, deleting" << endl;
+			delete it->second;
 			}
 		}
 		
@@ -139,6 +165,8 @@ int PuzzleSolver::run(PuzzleHeuristic *ph)
 		//**
 
 	}
+
+//deallocate and delete potentialmoves Map and Closed_List
 
 return Solutions.getSize();	
 //return int

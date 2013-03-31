@@ -84,6 +84,7 @@ Board::~Board()
 Board::Board(const Board &b)
 {
 	tiles_ = new int[b.size_];
+	size_ = b.size_;
 	//*tiles_ = *(b.tiles_);
 	for(int i=0; i<b.size_; i++)
 	{
@@ -107,7 +108,7 @@ void Board::move(int tile)
   int dim = static_cast<int>(sqrt(size_));
 
 	//checking if tile is in the game or not
-	if(tile<0 || tile>(size_-1))
+	if(tile<-1 || tile>(size_))
 	{
 		cout << "Tile does not exist." << endl;
 	}
@@ -200,10 +201,6 @@ std::map<int, Board*> Board::potentialMoves()
 {
  std::map<int, Board*> mymap;
  int dim = (sqrt(this->size_));
- Board *Board1 = new Board(this->tiles_, this->size_);
- Board *Board2 = new Board(this->tiles_, this->size_);
- Board *Board3 = new Board(this->tiles_, this->size_);
- Board *Board4 = new Board(this->tiles_, this->size_);
 
 //index where zero is
 int zeroIndex;
@@ -213,31 +210,41 @@ int zeroIndex;
  	if(this->tiles_[i] == 0)
  	{
  		zeroIndex = i;
+ 		cout << "ZeroIndex is at: " << i << endl;
  		break;
  	}
  }
  if (dim != 0)
  {
- //checking if 0 is on the right edge
+ //checking if 0 is on the left edge
  if(zeroIndex%dim == 0)
  {
  
  }
  else
  {
- 	Board1->move(zeroIndex+1);
- 	mymap[(this->tiles_[zeroIndex+1])] = Board1;
+
+   	cout << "     Board1" << endl;
+ 	Board *Board1 = new Board(*this);
+ 	int temp = zeroIndex-1;
+ 	cout << "Tile is: " << this->tiles_[temp] << endl;
+ 	Board1->move(this->tiles_[temp]);
+ 	mymap[(this->tiles_[zeroIndex-1])] = Board1;
  }
  
- //checking if 0 is on the left edge
- if(zeroIndex%dim == 1)
+ //checking if 0 is on the right edge
+ if(zeroIndex%dim == (dim-1))
  {
  
  }
  else
  {
- 	Board2->move(zeroIndex-1);
- 	mymap[(this->tiles_[zeroIndex-1])] = Board2;
+  	cout << "     Board2" << endl;
+ 	Board *Board2 = new Board(*this);
+ 	int temp = zeroIndex+1;
+ 	cout << "Tile is: " << this->tiles_[temp] << endl;
+ 	Board2->move(this->tiles_[temp]);
+ 	mymap[(this->tiles_[zeroIndex+1])] = Board2;
  } 
  
  //checking if 0 is on the top row
@@ -247,17 +254,25 @@ int zeroIndex;
  }
  else
  {
- 	Board3->move(zeroIndex-dim);
+  	cout << "     Board3" << endl;
+ 	Board *Board3 = new Board(*this);
+ 	int temp = zeroIndex-dim;
+ 	cout << "Tile is: " << this->tiles_[temp] << endl;
+ 	Board3->move(this->tiles_[temp]);
  	mymap[(this->tiles_[zeroIndex-dim])] = Board3;
  } 
  //checking if 0 is on the bottom row
- if(zeroIndex > dim*(dim-1))
+ if(zeroIndex >= dim*(dim-1))
  {
  
  }
  else
  {
- 	Board4->move(zeroIndex+dim);
+  	cout << "     Board4" << endl;
+ 	Board *Board4 = new Board(*this);
+ 	int temp = zeroIndex+dim;
+ 	cout << "Tile is: " << this->tiles_[temp] << endl;
+ 	Board4->move(this->tiles_[temp]);
  	mymap[(this->tiles_[zeroIndex+dim])] = Board4;
  } 
 }
