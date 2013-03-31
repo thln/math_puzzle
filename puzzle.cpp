@@ -69,7 +69,7 @@ cout << test.top() << endl;
 			cout<< "LALA1" << endl;
 			Answer->printSolutions();
 			cout<< "LALA1" << endl;
-		}
+		} 
 		else
 		{
 			b.move(answer);
