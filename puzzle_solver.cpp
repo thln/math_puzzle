@@ -32,7 +32,7 @@ void PuzzleSolver::printSolutions()
 	cout << " " << endl;
 	cout << "(Expansions = " << expansions_ << ")" << endl;
 }
-
+ 
 //Runs the A Star Algorithm
 int PuzzleSolver::run(PuzzleHeuristic *ph)
 {

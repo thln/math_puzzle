@@ -65,6 +65,7 @@ cout << test.top() << endl;
 			PuzzleSolver *Answer = new PuzzleSolver(b);
 			cout<< "LALA1" << endl;
 			Answer->run(MH);
+			//Answer->run(OOPH);
 			cout<< "LALA1" << endl;
 			Answer->printSolutions();
 			cout<< "LALA1" << endl;
