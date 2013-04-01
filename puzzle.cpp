@@ -27,7 +27,7 @@ using namespace std;
 	* Implement the cheat
 	* Make sure there are no memory leaks
 	* Document using Doxygen*/
-
+ 
 int main(int argc, char *argv[])
 {
   if(argc < 3){
