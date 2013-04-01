@@ -4,7 +4,11 @@
 #include "puzzle_heur.h"
 using namespace std;
 
-//Out Of Place Heuristic Computation
+
+/** Out Of Place Heuristic Computation
+	* Computes the heuristic score OutOfPlace Style
+	* @param *tiles Derefences the tiles array you want to use
+	* @param size The size of the tiles array */
 int OutOfPlaceHeuristic::compute(int *tiles, int size)
 {
 	int heuristic=0;
@@ -20,7 +24,11 @@ int OutOfPlaceHeuristic::compute(int *tiles, int size)
 	return heuristic;
 }
 
-//Manhattan Heuristic Computation
+
+/** Manhattan Heuristic Computation
+	* Computes the heuristic score Manhattan Style
+	* @param *tiles Derefences the tiles array you want to use
+	* @param size The size of the tiles array */
 int ManhattanHeuristic::compute(int *tiles, int size)
 {
 	int iRow;

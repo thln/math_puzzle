@@ -4,36 +4,37 @@
 #include "board.h"
 #include "puzzle_heur.h"
 
+/**
+	* This is a class to keep track of the possible moves.
+	* @author Tam Henry Le Nguyen */
+
 class PuzzleMove
 {
  public:
-  // Constructor for starting Board of an A* search
+  /** Constructor for starting Board of an A* search */
   PuzzleMove(Board &b);
 
-  // Constructor for subsequent search boards 
-  // (i.e. those returned by Board::potentialMoves() )
+  /** Constructor for subsequent search boards 
+   * (i.e. those returned by Board::potentialMoves() ) */
   PuzzleMove(int tile, Board *b, PuzzleMove *parent);
 
-  // Destructor
+  /** Destructor */
   ~PuzzleMove();
 
-  // Compare to PuzzleMoves based on f distance 
+  /** Compare to PuzzleMoves based on f distance */ 
   bool operator<(const PuzzleMove& p) const;
   bool operator>(const PuzzleMove& p) const;
   bool operator==(const PuzzleMove& p) const;
-
-  //**** Add any other member functions you think appropriate
-
 
 
 
   // Data members can be public
  public:
-  int tileMove_;  // tile moved to reach the Board b
-  Board *b_;      // Pointer to a board representing the updated state
-  int g_;         // distance from the start board
-  int h_;         // heuristic distance to the goal
-  PuzzleMove *prev_;  // Pointer to parent PuzzleMove
+  int tileMove_;  /** tile moved to reach the Board b */
+  Board *b_;      /** Pointer to a board representing the updated state */
+  int g_;         /** distance from the start board */
+  int h_;         /** heuristic distance to the goal */
+  PuzzleMove *prev_;  /** Pointer to parent PuzzleMove */
 };
 
 

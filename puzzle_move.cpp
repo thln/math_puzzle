@@ -1,6 +1,8 @@
 #include "puzzle_move.h"
 
-//Constructor for starting Board of an A* search
+/** Constructor
+	* Constructor for starting Board of an A* search
+	* @param &b References the board you want to use */
 PuzzleMove::PuzzleMove(Board &b)
 {
 	tileMove_ = 0;
@@ -11,8 +13,12 @@ PuzzleMove::PuzzleMove(Board &b)
 
 }
 
-//Constructor for subsequent search boards
-// (i.e) like those returned by Board::potentialMoves()
+/** Constructor
+	* Constructor for subsequent search boards
+	* (i.e) like those returned by Board::potentialMoves()
+	* @param tile The tile that is being moved
+	* *b The current board
+	* *Parent the previous puzzlemove */
 PuzzleMove::PuzzleMove(int tile, Board *b, PuzzleMove *Parent)
 {
 	tileMove_ = tile;
@@ -22,7 +28,8 @@ PuzzleMove::PuzzleMove(int tile, Board *b, PuzzleMove *Parent)
 	h_ = 0;
 }
 
-//Destructor
+/** Desructor
+	* Deletes dynamically allocated items, b_ and prev_ */
 PuzzleMove::~PuzzleMove()
 {
 	delete b_;
@@ -32,7 +39,9 @@ PuzzleMove::~PuzzleMove()
 
 
 
-// Compare to PuzzleMoves based on f distance (needed for priority queue
+/** == Operator
+	* Compare to PuzzleMoves based on f distance (needed for priority queue)
+	* @param p the Puzzlemove you are comparing to */
 bool PuzzleMove::operator==(const PuzzleMove& p) const
 {
 	if((g_ + h_) == (p.g_ + p.h_))
@@ -45,6 +54,9 @@ bool PuzzleMove::operator==(const PuzzleMove& p) const
 	}
 }
 
+/** < Operator
+	* Compare to PuzzleMoves based on f distance (needed for priority queue)
+	* @param p the Puzzlemove you are comparing to */
 bool PuzzleMove::operator<(const PuzzleMove& p) const
 {
   if((g_ + h_) < (p.g_ + p.h_)){
@@ -58,6 +70,9 @@ bool PuzzleMove::operator<(const PuzzleMove& p) const
   }
 }
 
+/** > Operator
+	* Compare to PuzzleMoves based on f distance (needed for priority queue)
+	* @param p the Puzzlemove you are comparing to */
 bool PuzzleMove::operator>(const PuzzleMove& p) const
 {
   if( (g_ + h_) > (p.g_ + p.h_) ){

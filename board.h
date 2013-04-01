@@ -5,6 +5,11 @@
 #include <map>
 #include <functional>
 
+/**
+	* This class is used to keep track of a basic game board of size tiles along with useful member functions.
+	* @author Tam Henry Le Nguyen */
+
+
 class Board
 {
  public:
@@ -36,18 +41,24 @@ class Board
   bool solved();
 
   // Operators
+  /** Operators
+    * << prints out the board, == & < & != compares the board */
   friend std::ostream& operator<<(std::ostream &os, const Board &b);
   bool operator==(const Board& rhs) const;
   bool operator<(const Board& rhs) const;
   bool operator!=(const Board& rhs) const;
   
   // Accessors
+  /** Accessors
+  	* gives access to the tiles array and the size variable*/
   int* getTiles();
   int getSize();
   // Add any accessors
 
 
  private:
+ /** Data 
+ 	* Keeps a pointer to the tiles array and keeps track fo the size variable*/
   int *tiles_;
   int size_;
   // Add Data members

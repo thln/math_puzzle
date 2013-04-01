@@ -7,20 +7,24 @@
 
 using namespace std;
 
-//Constructor
+/** Constructor
+	* Makes a puzzlesolver using the board
+	* @param &b The Board you are making a puzzle solver from */
 PuzzleSolver::PuzzleSolver(const Board &b)
 {
 	b_ = b;
 	expansions_ = 0;
 }
 
-//Destructor
+/** Destructor
+	* Deletes puzzle solver*/
 PuzzleSolver::~PuzzleSolver()
 {
 
 }
 
-//Printing or "returning" the function
+/** printSolutions function
+	* Prints out the solutions in order and the number of expansions */
 void PuzzleSolver::printSolutions()
 {
 	cout << " " << endl;
@@ -34,6 +38,9 @@ void PuzzleSolver::printSolutions()
 }
  
 //Runs the A Star Algorithm
+/** Run Function
+	* Runs the A Star Algorithm
+	* @param *ph the PuzzleHeuristic you are passing through */
 int PuzzleSolver::run(PuzzleHeuristic *ph)
 {
 
@@ -43,8 +50,8 @@ int PuzzleSolver::run(PuzzleHeuristic *ph)
 
 	PuzzleMove *StartState = new PuzzleMove(b_);
 	
-	cout << "Testing StartState board!!!!!!" << endl;
-	cout<<*(StartState->b_) << endl;
+//	cout << "Testing StartState board!!!!!!" << endl;
+//	cout<<*(StartState->b_) << endl;
 
 	//Adding to open list and closed set
 	Open_List.push(StartState);
@@ -62,8 +69,8 @@ int PuzzleSolver::run(PuzzleHeuristic *ph)
 		Garbage_List.push_back(move);
 	
 //		cout<< "LALA3" << endl;
-		cout << "Testing Current Move board!!!!!!" << endl;
-		cout<<*(move->b_) << endl;
+//		cout << "Testing Current Move board!!!!!!" << endl;
+//		cout<<*(move->b_) << endl;
 		
 		if(move->b_->solved())
 		{
@@ -83,12 +90,12 @@ int PuzzleSolver::run(PuzzleHeuristic *ph)
 		//PuzzleMove *temp = new PuzzleMove(*(move->b_));
 		PuzzleMove *temp = new PuzzleMove(move->tileMove_, move->b_, move->prev_);
 		
-		cout << "Testing Current Temp board!!!!!!" << endl;
-		cout<<*(temp->b_) << endl;
-		cout << "Temp's tileMove " << temp->tileMove_ << endl;
+//		cout << "Testing Current Temp board!!!!!!" << endl;
+//		cout<<*(temp->b_) << endl;
+//		cout << "Temp's tileMove " << temp->tileMove_ << endl;
 		if(temp->prev_ == NULL)
 		{
-		cout << "temp is NULL" << endl;
+//		cout << "temp is NULL" << endl;
 		}
 //		cout << "Temp's previous " << *(temp->prev_->b_) << endl;
 
@@ -99,7 +106,7 @@ int PuzzleSolver::run(PuzzleHeuristic *ph)
 			while(temp->prev_ != NULL)
 			{
 		cout<< "Adding to Solutions List" << endl;
-		cout << "Temp's tileMove " << temp->tileMove_ << endl;
+//		cout << "Temp's tileMove " << temp->tileMove_ << endl;
 				Solutions.push_back(temp->tileMove_);
 				temp = temp->prev_;
 			}
@@ -111,27 +118,27 @@ int PuzzleSolver::run(PuzzleHeuristic *ph)
 		
 		cout<< "Not Solved Yet" << endl;
 		
-		cout<<*(move->b_)<<endl;
+//		cout<<*(move->b_)<<endl;
 		
 		//makes a map of the current board's potential moves/boards
 		potentialmap = move->b_->potentialMoves();
 		//travels through the map 
 		
-		cout<< "Going into forloop" << endl;
+//		cout<< "Going into forloop" << endl;
 		map<int, Board*>::iterator it;
 	//	it = potentialmap.begin();
 	
 		//Something wrong with forloop, it's not iterating
 		for(it = potentialmap.begin(); it != potentialmap.end(); ++it)
 		{
-		cout<< "In ForLoop" << endl;
+//		cout<< "In ForLoop" << endl;
 			//if(*(it.second())
 			//if the value of the current iterator IS NOT in the Closed_Set it will return Closed_Set.end()
 			//therefore if the current move(it) is new and must be explored
 			if(Closed_Set.find(it->second) == Closed_Set.end())
 			{
 			
-			cout<< "New Board" << endl;
+//			cout<< "New Board" << endl;
 
 			Closed_Set.insert(it->second);
 			PuzzleMove *freshMove = new PuzzleMove(it->first, it->second, move);
@@ -139,13 +146,13 @@ int PuzzleSolver::run(PuzzleHeuristic *ph)
 			//freshMove->prev_ = move;
 			Open_List.push(freshMove);
 			
-			cout << "Expansions Before: " << expansions_ << endl;
+//			cout << "Expansions Before: " << expansions_ << endl;
 			expansions_++;
-			cout << "Expansions After: " << expansions_ << endl;
+//			cout << "Expansions After: " << expansions_ << endl;
 			}
 			else
 			{
-			cout << "Old Board, deleting" << endl;
+//			cout << "Old Board, deleting" << endl;
 			delete it->second;
 			}
 		}
@@ -168,12 +175,14 @@ int PuzzleSolver::run(PuzzleHeuristic *ph)
 
 //deallocate and delete potentialmoves Map and Closed_List
 
+
 return Solutions.getSize();	
 //return int
 //	return;
 }
 
-//returns number of expansions
+/** getNumExpansions
+	* returns number of expansions */
 int PuzzleSolver::getNumExpansions()
 {
   return expansions_;

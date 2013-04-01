@@ -8,6 +8,26 @@
 
 using namespace std;
 
+/** @mainpage CSCI 102 Programming Project #3
+	@section purpose Purpose/Overview
+	I am to create Number Puzzle Slider. It is to be same as the 
+	childhood game where the player slides the number around. In order 
+	to solve the puzzle, the blank space must be in the top left corner
+	while the rest of the numbers are in order left to right, top to bottom.
+	I must also include a "cheat", where once used, it will give you the 
+	necessary tiles to move in order to solver the current board in the most
+	efficient manner.
+	@section requirements Requirements 
+	* Implement a Board Class
+	* Implement the Puzzle Play in puzzle.cpp
+	* Implement a PuzzleMove Class
+	* Implement a PMMinList Class
+	* Implement classes to use the Manhattan Heuristic or the OutOfPlace Heuristic
+	* Implement a PuzzleSolver Class
+	* Implement the cheat
+	* Make sure there are no memory leaks
+	* Document using Doxygen*/
+
 int main(int argc, char *argv[])
 {
   if(argc < 3){
@@ -53,22 +73,16 @@ cout << test.top() << endl;
 		cout << "Enter tile number to move or -1 for a cheat: " << endl;
 		cin>>answer;
 
-//****MAJOR PROBLEMS
-//* last problem - Is adding 0's to the solutions vector
-//!!* 1 Goes straight into the "solved" if statement and then breaks
-//!!* 2 Does not push back the tiles into the Solutions linked list
-//!!* 3 Switches the number 1 with a random number (modifies original gameboard)
-//!!* 4 Apparently, if it skips the if statement, there is a floating point exception (core dumped)
 	
 		if(answer == -1)
 		{
 			PuzzleSolver *Answer = new PuzzleSolver(b);
-			cout<< "LALA1" << endl;
+			//cout<< "LALA1" << endl;
 			Answer->run(MH);
 			//Answer->run(OOPH);
-			cout<< "LALA1" << endl;
+			//cout<< "LALA1" << endl;
 			Answer->printSolutions();
-			cout<< "LALA1" << endl;
+			//cout<< "LALA1" << endl;
 		} 
 		else
 		{

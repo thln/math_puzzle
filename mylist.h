@@ -3,31 +3,34 @@
 #include <iostream>
 #include <stdexcept>
 
+/**
+	* This templated class is used to keep track of a dynamic array along with useful member functions.
+	* @author Tam Henry Le Nguyen */
 
 template <typename T> 
 class MyList
 {
 	private:
-		T *info_;
-		int size_;
-		int capacity_;
+		T *info_; /** a pointer to the information */
+		int size_; /** number of variables in dynamic array */
+		int capacity_; /** size of dynamic array*/
 
 	public:
-		MyList();
-		~MyList();
-		int getSize();
-		T& at(int loc);
-		T& operator[] (int n);
-		void push_back(T name);
-		bool remove(T val);
-		T pop(int loc);
-		void refresh();
+		MyList(); /** default constructor */
+		~MyList(); /** destructor */
+		int getSize(); /** returns Size */
+		T& at(int loc); /** gives the item at given location */
+		T& operator[] (int n); /** operator overload [] same as at */
+		void push_back(T name); /** pushes an item to end of array */
+		bool remove(T val); /** deletes an item in array */
+		T pop(int loc); /** pop the first item in array */
+		void refresh(); /** clears array */
 
 };
 
 
-//class MyList methods
-//constructor
+/** Constructor
+	* Makes an array with no variables with a capacity to hold one variable*/
 template <typename T> 
 MyList<T>::MyList(){
 	capacity_=1;
@@ -35,26 +38,31 @@ MyList<T>::MyList(){
 	size_=0;
 }
 
-//destructor
+/** Destructor
+	* Deletes the array */
 template <typename T>
 MyList<T>::~MyList(){
 //	delete [] info_;
 //	size_=0; 
 }
 
-//returning size of list
+/** getSize Function 
+	* Returns the current size(number of items) of array */
 template <typename T>
 int MyList<T>::getSize(){
 	return size_;
 }
 
-//Clear everything in the list
+/** Refresh Function 
+	* Clear everything in the list */
 template <class T>
 void MyList<T>::refresh(){
 	size_ = 0;
 }
 
-//adding name to end of the list
+/** Push_back function
+	* Adds the item to the end of the ist
+	* @param name Item you wish you add */
 template <typename T>
 void MyList<T>::push_back(T name){
 	if(size_==capacity_){
@@ -70,14 +78,19 @@ void MyList<T>::push_back(T name){
 	size_++;
 }
 
-//returning name at specified location on the array
+
+/** at Function 
+	* Return name at specified location in the array
+	* @param loc The location of the item you want */
 template <typename T>
 T& MyList<T>::at(int loc){
 	return info_[loc];
 }
 
 
-//Removing a Value
+/** Remove Function 
+	* Removes the value
+	* @param val The value you want to remove*/
 template <typename T>
 bool MyList<T>::remove(T val){
 
@@ -123,7 +136,9 @@ T temp = info_[loc];
 }
 */
 
-//Operator Overload
+/** Operator Overload 
+	* Overloads the [] to return the item at the location
+	* @param n The location of the item */
 template <typename T>
 T& MyList<T>::operator[] (int n){
 	return info_[n];

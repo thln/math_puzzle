@@ -7,8 +7,9 @@
 #include "board.h"
 using namespace std;
 
-
-// Default constructor
+/** Default constructor 
+	*makes a basic board of size 4 with tiles already solved.
+*/
 Board::Board()
 {
  size_ = 4;
@@ -23,7 +24,7 @@ Board::Board()
  * by moving the space tile with a randomly chosen direction N, W, S, E
  * some of which may be invalid, in which case we skip that move 
  * 
- *  @param size Number of tiles for the game.  \
+ *  @param size Number of tiles for the game.  
  *      Should be a perfect square (4, 16, 25)
  *  @param numInitMoves Number of tile moves to attempt to scramble the board
  *  @param seed Use to seed the random number generator (srand) 
@@ -74,13 +75,16 @@ Board::Board(int size, int numInitMoves, int seed)
 }
 
 
-// Default destructor
+/** Default destructor
+	* deletes the dynamically allocated tiles. */
 Board::~Board()
 {
 	  delete [] tiles_;
 }
 
-//Copy Constructor #1
+/** Copy Constructor #1 
+	* copys a current board and makes a new one
+	* @param &b References a board to make a copy of. */
 Board::Board(const Board &b)
 {
 	tiles_ = new int[b.size_];
@@ -92,7 +96,10 @@ Board::Board(const Board &b)
 	}
 }
 
-//Copy Constructor #2
+/** Copy Constructor #2
+	* makes a board with given parameters
+	* @param *tiles Copies the given tiles to a board
+	* @param size Makes a board of given size  */
 Board::Board(int *tiles, int size)
 {
 	tiles_ = new int[size];
@@ -102,7 +109,9 @@ Board::Board(int *tiles, int size)
 	}
 }
 
-//Swaps the blank with the specified tile
+/** Move Function 
+	* Swaps the blank tile with the specified tile
+	* @param tile The tile that you specified to move */
 void Board::move(int tile)
 {
   int dim = static_cast<int>(sqrt(size_));
@@ -113,27 +122,6 @@ void Board::move(int tile)
 		cout << "Tile does not exist." << endl;
 	}
 	else{
-
-/* faster way to do shown below
-	//finding specified tile
-	for(int i=0; i<size_; i++)
-	{
-	   if(tile == tiles_[i])
-	   {
-	      //finding the zero or "empty" tile
-	      for(int j=0; j<size_; j++)
-	      {
-		if(tiles[j] == 0)
-		{
-		//swapping tiles
-		  tiles[j] = tile;
-		  tiles[i] = 0;
-		  break;
-		}		
-	      }
-	   }
-	}
-*/
 	
 	//looping through all tiles
 	//variables keeping track of tiles to swap
@@ -181,7 +169,8 @@ void Board::move(int tile)
 	}
 }
 
-//Checks if board is solved
+/** Solve Function
+	* Checks if the board is solved or not */
 bool Board::solved()
 {
 	for(int i=0; i<size_; i++)
@@ -195,8 +184,10 @@ bool Board::solved()
   return true;
 }
 
-//Generates potential moves and returns new board
-//Key=tile, Value=Ptr to corresponding Board
+/** potenialMoves function 
+	* Generates potential moves and returns a map of every possible board
+	* Key=tile, Value=Ptr to corresponding Board
+	* @return mymap A map of the possible boards*/
 std::map<int, Board*> Board::potentialMoves()
 {
  std::map<int, Board*> mymap;
@@ -279,20 +270,23 @@ int zeroIndex;
 	return mymap;
 }
 
-//Tile Accessor
+/** Tile Accessor 
+	* @return tiles_ returns the array of tiles*/
 int* Board::getTiles()
 {
 	return tiles_;
 }
 
-//Size Accessor
+/** Size Accessor
+	* @return size_ returns the size variable */
 int Board::getSize()
 {
 	return size_;
 }
 
-//Operators
-//Checks if one board is less than another board
+/** < Operators
+	* Checks if one board is less than another board
+	* @param rhs the board you comparing this to */
 bool Board::operator<(const Board& rhs) const
 {
   if(size_ < rhs.size_){
@@ -313,7 +307,10 @@ bool Board::operator<(const Board& rhs) const
   return val;
 }
 
-//Printing out the board game with this friend function
+
+/** << Operators
+	* Prints out board
+	* @param &b Board to print */
 std::ostream& operator<<(std::ostream &os, const Board &b)
 {
   int dim = static_cast<int>(sqrt(b.size_));
@@ -336,7 +333,9 @@ std::ostream& operator<<(std::ostream &os, const Board &b)
  return os;
 }
 
-//Checking if two boards are equal to each other
+/** == Operators
+	* Compares two boards to see if they are equal
+	* @param rhs Board to compare */
 bool Board::operator==(const Board& rhs) const
 {
 	if(size_ < rhs.size_){
@@ -352,7 +351,9 @@ bool Board::operator==(const Board& rhs) const
     return true;
 }
 
-//Checking if two boards are not equal to each other
+/** != Operators
+	* Compares two boards to see if they are not equal
+	* @param rhs Board to compare */
 bool Board::operator!=(const Board& rhs) const
 {
 	if(size_ < rhs.size_){

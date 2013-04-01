@@ -9,6 +9,10 @@
 #include "puzzle_heur.h"
 #include "mylist.h"
 
+/**
+	* This is a class used to solve  a puzzle.
+	* @author Tam Henry Le Nguyen */
+
 class PuzzleSolver
 {
  public:
@@ -17,27 +21,29 @@ class PuzzleSolver
   //*** when you write your code for the run() funciton
   typedef std::set<Board *, BoardLessThan> BoardSet;
 
-  // Constructor (makes a copy of the Board and stores it in _b
+  /** Constructor (makes a copy of the Board and stores it in _b */
   PuzzleSolver(const Board &b);
 
-  // Destructor
+  /** Destructor */
   ~PuzzleSolver();
 
-  // Run the A* search returning -1 if no solution exists or
-  //  the number of moves in the solution
+  /** Run the A* search returning -1 if no solution exists or */
+  /** the number of moves in the solution */
   int run(PuzzleHeuristic *ph);
 
-  //**** Return the solution List
+  /** Prints the solutions out */
   void printSolutions();
  
 
-  // Return how many expansions were performed in the search
+  /** Return how many expansions were performed in the search */
   int getNumExpansions();
 
  private:
+ /** Keeps track of board */
   Board b_;
+  /** Keeps track of number of expansions */
   int expansions_;
-  //**** Declare a List to store your solutions sequence of tiles to move
+  /** Declares a List to store your solutions sequence of tiles to move */
   MyList<int> Solutions;            //stores solution set
 };
 
