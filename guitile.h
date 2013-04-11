@@ -17,6 +17,7 @@ public:
 	~GUITile();
 	QGraphicsSimpleTextItem *numbers;
 	void mousePressedEvent(QGraphicsSceneMouseEvent* event);
+	int getValue();
 
 private:
 	GraphicsWindow *parent;

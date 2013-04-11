@@ -31,6 +31,7 @@ public:
     ~GraphicsWindow();
 	QGraphicsScene *getScene();
     void show();
+    void move(int tile);
     
 private:
     QGraphicsScene *scene;

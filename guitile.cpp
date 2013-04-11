@@ -30,6 +30,11 @@ GUITile::~GUITile()
 
 }
 
+int GUITile::getValue()
+{
+	return value;
+}
+
 void GUITile::mousePressedEvent(QGraphicsSceneMouseEvent* event)
 {
 	//parent->moveTile(this);

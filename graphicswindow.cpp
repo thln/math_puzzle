@@ -143,6 +143,65 @@ QGraphicsScene *GraphicsWindow::getScene()
 	return scene;
 }
 
+void GraphicsWindow::move(int tile)
+{
+/*
+  int dim = static_cast<int>(sqrt(size_));
+
+	//checking if tile is in the game or not
+	if(tile<-1 || tile>(size_))
+	{
+		cout << "Tile does not exist." << endl;
+	}
+	else{
+	
+	//looping through all tiles
+	//variables keeping track of tiles to swap
+	int a, b;
+	for(int i=0; i<size_; i++)
+	{
+		//finding shown tile
+		if(tile == tiles_[i])
+		{
+		a = i;
+		}
+		//finding zero tile
+		if(0 == tiles_[i])
+		{
+		b = i;
+		}
+		
+	}
+	//Checks if two tiles are next to each other
+	if( a == b+sqrt(size_) || a == b-sqrt(size_) || a == b+1 || a == b-1)
+	{
+	//Checks if numbers are on the "edge"
+		//Special 2 square case
+		if(size_ == 4)
+		{
+			if( (a==0 && b==3) || (b==0 && a==3) || (a==1 && b==2) || (b==1 && a==2) )
+			{
+			cout << "Incorrect tile movement." << endl;
+			}
+			else
+			{
+			tiles_[a] = 0;
+	 		tiles_[b] = tile;
+			}
+		}
+		else if((a%dim == 0 && b%dim == dim-1) || (b%dim == 0 && a%dim == dim-1))
+		{
+			cout << "Incorrect tile movement." << endl;
+		}
+		else{
+	 		tiles_[a] = 0;
+	 		tiles_[b] = tile;
+	 	}
+	}
+	}
+*/
+}
+
 GraphicsWindow::~GraphicsWindow()
 {
     timer->stop();

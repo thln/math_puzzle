@@ -99,7 +99,7 @@ void MainWindow::startGame()
 	int randMoves = textfields->getStartMovesEdit()->text().toInt();
 	int randSeed = textfields->getRandomSeedEdit()->text().toInt();
 	
-//Printing out messages
+//Printing out error messages if any
 	tempOutput->appendPlainText("Size: "+ QString::number(size));
 	tempOutput->appendPlainText("# of random Moves: "+ QString::number(randMoves));	
 	tempOutput->appendPlainText("random Seed Number: "+ QString::number(randSeed));
@@ -124,11 +124,12 @@ void MainWindow::startGame()
   		QBrush blueBrush(Qt::blue);
   		int index = 0;
 //  		tempOutput->appendPlainText("DIM: "+ QString::number(dim));
-  		
+ 
+//making the tiles 		
 		for(int i=0; i<dim; i++)
 		{
 			for(int j=0; j<dim; j++)
-			{ //360.0/dim
+			{ 
 			tiles[index] = new GUITile(gw, index, 10.0+(j*(360.0/dim)), 10.0+(i*(360.0/dim)), 360.0/dim, 360.0/dim);
 			
 			if(index != 0)
@@ -142,8 +143,34 @@ void MainWindow::startGame()
 			}
 //		tempOutput->appendPlainText(QString::number(index));
 
-//	srand(randSeed);
-//	rand()%size;
+
+	//Scrambling time
+	int counter=0;
+	int zero_Index=0;
+	srand(randSeed);
+	while(counter != randMoves)
+	{
+	int temp_index = rand()%size;
+	if( zero_Index == temp_index+dim || zero_Index == temp_index-dim || zero_Index == temp_index+1 || zero_Index == temp_index-1)
+	{
+	//Checks if numbers are on the "edge"
+		if((zero_Index%dim == 0 && temp_index%dim == dim-1) || (temp_index%dim == 0 && zero_Index%dim == dim-1))
+		{
+//			cout << "Incorrect tile movement." << endl;
+		}
+		else{
+	 		//tiles_[a] = 0;
+	 		//tiles_[b] = tile;
+	 		//move here
+	 		//add to counter
+	 	}
+	}
+	else
+	{
+		//do nothing
+	}
+	
+	}
 		}
 	}
 	
