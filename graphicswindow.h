@@ -14,6 +14,7 @@
 #include <QLineEdit>
 #include <QDockWidget>
 #include <QLabel>
+#include <QGraphicsRectItem>
 
 #include "bouncingrectangle.h"
 
@@ -35,6 +36,11 @@ private:
     QGraphicsScene *scene;
     QGraphicsView *view;
     QTimer *timer;
+    QGraphicsRectItem *box1;
+    QGraphicsRectItem *box2;
+    QGraphicsRectItem *box3;
+    QGraphicsRectItem *box4;    
+    
     BouncingRectangle *item;
     	QPushButton *buttonclick;
     	vector<BouncingRectangle*> RectangleVector;

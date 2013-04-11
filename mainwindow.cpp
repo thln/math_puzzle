@@ -5,6 +5,8 @@
 #include <time.h>
 #include <QToolBar>
 #include <QAction>
+#include <QDockWidget>
+#include <QWidget>
 
 using namespace std;
 
@@ -16,23 +18,55 @@ MainWindow::MainWindow()
 
 //---------------------------------------------------------------
 //Toolbar
-QToolBar *tool = new QToolBar;
+tool = new QToolBar;
 
 //Actions
 QAction *startGameAction = new QAction(tr("&Start Game"), this);
 tool->addAction( startGameAction );
 connect( startGameAction, SIGNAL(triggered() ), this, SLOT(startGame() ));
 
-QAction *aStarAlgAction = new QAction( tr("&A Star Algorithm"), this );
-tool->addAction( aStarAlgAction );
-connect( aStarAlgAction, SIGNAL(triggered() ), this, SLOT( aStarAlg() ));
+QAction *cheatGameAction = new QAction(tr("&Cheat Game"), this);
+tool->addAction( cheatGameAction );
+connect( cheatGameAction, SIGNAL(triggered() ), this, SLOT( cheatGame() ));
 
-QAction *quitGameAction = new QAction( tr("&Quit Game"), this );
+QAction *quitGameAction = new QAction(tr("&Quit Game"), this);
 tool->addAction( quitGameAction );
 connect( quitGameAction, SIGNAL(triggered() ), this, SLOT(quitGame() ));
 
 tool->show();
 //---------------------------------------------------------------
+//Radio Buttons
+mhChoice = new QRadioButton(tr("&Manhattan Heuristic"), this);
+connect(mhChoice, SIGNAL(clicked(bool)), this, SLOT(clickedstate(bool)));
+mhChoice->setAutoExclusive(false);
+
+ooohChoice = new QRadioButton(tr("&Out Of Order Heuristic"), this);
+connect( ooohChoice, SIGNAL(clicked(bool)), this, SLOT(clickedstate(bool)));
+ooohChoice->setAutoExclusive(false);
+
+mhChoice->setChecked(false);
+ooohChoice->setChecked(false);
+
+horlayout = new QHBoxLayout();
+horlayout->addWidget(mhChoice);
+horlayout->addWidget(ooohChoice);
+
+qdw = new QDockWidget();
+//qdw->setWidget(hor
+
+
+//---------------------------------------------------------------
+//Text Boxes
+
+textfields = new formlayout();
+
+//qdw = new QDockWidget();
+qdw->setWidget(textfields);
+addDockWidget(Qt::LeftDockWidgetArea, qdw);
+qdw->setFeatures(QDockWidget::NoDockWidgetFeatures);
+
+//---------------------------------------------------------------
+
 }
 
 MainWindow::~MainWindow()
@@ -46,7 +80,7 @@ void MainWindow::startGame()
 
 }
 
-void MainWindow::aStarAlg()
+void MainWindow::cheatGame()
 {
 
 }
@@ -54,4 +88,9 @@ void MainWindow::aStarAlg()
 void MainWindow::quitGame()
 {
 	exit(EXIT_FAILURE);
+}
+
+bool MainWindow::clickedstate()
+{
+	return false;
 }

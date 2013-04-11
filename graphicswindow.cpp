@@ -76,10 +76,12 @@ GraphicsWindow::GraphicsWindow()  {
     //We need a scene and a view to do graphics in QT
     scene = new QGraphicsScene();
     setScene(scene);
+    setWindowTitle( "Programming Assignment #4: Math Puzzles");
     //view = new QGraphicsView( scene );
 
     //To fill a rectangle use a QBrush. To draw the border of a shape, use a QPen
     QBrush redBrush(Qt::red);
+    QPen blackPen(Qt::black);
     QBrush blueBrush(Qt::blue);
     QBrush yellowBrush(Qt::yellow);
     QBrush greenBrush(Qt::green);
@@ -87,26 +89,39 @@ GraphicsWindow::GraphicsWindow()  {
     //First 2 arguments are the x, y, of the upper left of the rectangle.
     //The second 2 arguments are the width and height
     //The last 2 arguments are the velocity in the x, and y, directions
-    item = new BouncingRectangle( 11.0, 74.0, 20.0, 20.0, 2, 3 );
-    item->setBrush( redBrush );
-    scene->addItem( item );
+   // Inserting boxes into a 360x360 pixel area
+    box1 = new QGraphicsRectItem( 10.0, 10.0, 180.0, 180.0);
+    box1->setBrush(redBrush);
+    box1->setPen(blackPen);
+    scene->addItem(box1);
+    box2 = new QGraphicsRectItem( 190.0, 10.0, 180.0, 180.0);
+    box2->setBrush(redBrush);
+    box2->setPen(blackPen);
+    scene->addItem(box2);
+    box3 = new QGraphicsRectItem( 10.0, 190.0, 180.0, 180.0);
+    box3->setBrush(redBrush);
+    box3->setPen(blackPen);
+    scene->addItem(box3);
+    box4 = new QGraphicsRectItem( 190.0, 190.0, 180.0, 180.0);
+    box4->setBrush(redBrush);
+    box4->setPen(blackPen);
+    scene->addItem(box4);
 
     //This sets the size of the window and gives it a title.
     setFixedSize( WINDOW_MAX_X*2, WINDOW_MAX_Y*2 );
-    setWindowTitle( "Graphical 8-Tile Puzzle");
 
     //This is how we do animation. We use a timer with an interval of 5 milliseconds
     //We connect the signal from the timer - the timeout() function to a function
     //of our own - called handleTimer - which is in this same MainWindow class
-    timer = new QTimer(this);
-    timer->setInterval(5);
+//    timer = new QTimer(this);
+//    timer->setInterval(5);
     
     //making a new button and giving it characteristics
 //    buttonclick = new QPushButton(this);
 //    buttonclick->setText("Start or Stop");
 //    buttonclick->setGeometry(0, 0, 180, 60);
-    //connecting timer to handletimer and buttonclick to a clicker via clicked
-    connect(timer, SIGNAL(timeout()), this, SLOT(handleTimer()));
+//    connecting timer to handletimer and buttonclick to a clicker via clicked
+//    connect(timer, SIGNAL(timeout()), this, SLOT(handleTimer()));
 //    connect(buttonclick, SIGNAL(clicked()), this, SLOT(clicker()));
 
 

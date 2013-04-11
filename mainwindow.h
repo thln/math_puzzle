@@ -5,9 +5,12 @@
 #include "graphicswindow.h"
 #include <QToolBar>
 #include <QAction>
-
-#define WINDOW_MAX_X 250
-#define WINDOW_MAX_Y 250
+#include "formlayout.h"
+#include <QDockWidget>
+#include <QWidget>
+//#include "guitile.h"
+#include <QRadioButton>
+#include <QHBoxLayout>
 
 using namespace std;
 
@@ -20,11 +23,18 @@ public:
 	~MainWindow();
 	
 private:
+	QDockWidget *qdw;
+	formlayout *textfields;
+	QToolBar *tool;
+	QRadioButton *mhChoice;
+	QRadioButton *ooohChoice;
+	QHBoxLayout *horlayout;
 
 public slots:
 	void startGame();
-	void aStarAlg();
+	void cheatGame();
 	void quitGame();
+	bool clickedstate();
 
 };
 
