@@ -129,7 +129,8 @@ void MainWindow::startGame()
 		{
 			for(int j=0; j<dim; j++)
 			{ //360.0/dim
-			tiles[index] = new QGraphicsRectItem(10.0+(i*(360.0/dim)), 10.0+(j*(360.0/dim)), 360.0/dim, 360.0/dim);
+			tiles[index] = new GUITile(gw, index, 10.0+(j*(360.0/dim)), 10.0+(i*(360.0/dim)), 360.0/dim, 360.0/dim);
+			
 			if(index != 0)
 			{
 				tiles[index]->setBrush(blueBrush);

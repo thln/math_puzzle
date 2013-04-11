@@ -32,7 +32,7 @@ private:
 	QRadioButton *ooohChoice;
 	QHBoxLayout *horlayout;
 	QPlainTextEdit *tempOutput;
-	QGraphicsRectItem *tiles[17];
+	GUITile *tiles[17];
 
 public slots:
 	void startGame();
