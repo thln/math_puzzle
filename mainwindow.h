@@ -23,7 +23,7 @@ public:
 	~MainWindow();
 	
 private:
-	QDockWidget *qdw;
+	QDockWidget *lqdw;
 	formlayout *textfields;
 	QToolBar *tool;
 	QRadioButton *mhChoice;

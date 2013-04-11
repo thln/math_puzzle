@@ -33,7 +33,7 @@ QAction *quitGameAction = new QAction(tr("&Quit Game"), this);
 tool->addAction( quitGameAction );
 connect( quitGameAction, SIGNAL(triggered() ), this, SLOT(quitGame() ));
 
-tool->show();
+//tool->show();
 //---------------------------------------------------------------
 //Radio Buttons
 mhChoice = new QRadioButton(tr("&Manhattan Heuristic"), this);
@@ -47,11 +47,16 @@ ooohChoice->setAutoExclusive(false);
 mhChoice->setChecked(false);
 ooohChoice->setChecked(false);
 
-horlayout = new QHBoxLayout();
-horlayout->addWidget(mhChoice);
-horlayout->addWidget(ooohChoice);
+//horlayout = new QHBoxLayout();
+tool->addWidget(mhChoice);
+tool->addWidget(ooohChoice);
 
-qdw = new QDockWidget();
+tool->show();
+
+QDockWidget *tqdw = new QDockWidget();
+tqdw->setWidget(tool);
+addDockWidget(Qt::TopDockWidgetArea, tqdw);
+tqdw->setFeatures(QDockWidget::NoDockWidgetFeatures);
 //qdw->setWidget(hor
 
 
@@ -60,10 +65,10 @@ qdw = new QDockWidget();
 
 textfields = new formlayout();
 
-//qdw = new QDockWidget();
-qdw->setWidget(textfields);
-addDockWidget(Qt::LeftDockWidgetArea, qdw);
-qdw->setFeatures(QDockWidget::NoDockWidgetFeatures);
+lqdw = new QDockWidget();
+lqdw->setWidget(textfields);
+addDockWidget(Qt::LeftDockWidgetArea, lqdw);
+lqdw->setFeatures(QDockWidget::NoDockWidgetFeatures);
 
 //---------------------------------------------------------------
 
