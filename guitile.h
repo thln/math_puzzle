@@ -18,6 +18,10 @@ public:
 	QGraphicsSimpleTextItem *numbers;
 	void mousePressedEvent(QGraphicsSceneMouseEvent* event);
 	int getValue();
+	double getxCord();
+	double getyCord();
+	double getWidth();
+	double getHeight();
 
 private:
 	GraphicsWindow *parent;

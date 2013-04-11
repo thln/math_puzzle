@@ -137,12 +137,12 @@ void MainWindow::startGame()
 				tiles[index]->setBrush(blueBrush);
 				tiles[index]->setPen(blackPen);
 			}
-			gw->getScene()->addItem(tiles[index]);
+//			gw->getScene()->addItem(tiles[index]);
 			index++;
 //			tempOutput->appendPlainText(QString::number(index));
 			}
 //		tempOutput->appendPlainText(QString::number(index));
-
+		}
 
 	//Scrambling time
 	int counter=0;
@@ -150,28 +150,39 @@ void MainWindow::startGame()
 	srand(randSeed);
 	while(counter != randMoves)
 	{
-	int temp_index = rand()%size;
-	if( zero_Index == temp_index+dim || zero_Index == temp_index-dim || zero_Index == temp_index+1 || zero_Index == temp_index-1)
-	{
-	//Checks if numbers are on the "edge"
-		if((zero_Index%dim == 0 && temp_index%dim == dim-1) || (temp_index%dim == 0 && zero_Index%dim == dim-1))
+		int temp_index = rand()%size;
+		if( zero_Index == temp_index+dim || zero_Index == temp_index-dim || zero_Index == temp_index+1 || zero_Index == temp_index-1)
 		{
-//			cout << "Incorrect tile movement." << endl;
+		//Checks if numbers are on the "edge"
+			if((zero_Index%dim == 0 && temp_index%dim == dim-1) || (temp_index%dim == 0 && zero_Index%dim == dim-1))
+			{
+				continue;
+	//			cout << "Incorrect tile movement." << endl;
+			}
+			else{
+tempOutput->appendPlainText("Temp: "+ QString::number(temp_index));
+				GUITile *temp = new GUITile;
+				temp = tiles[temp_index];
+				tiles[temp_index] = tiles[zero_Index];
+				tiles[zero_Index] = temp;
+				zero_Index = temp_index;
+				counter++;
+		 		//tiles_[a] = 0;
+		 		//tiles_[b] = tile;
+		 		//move here
+		 		//add to counter
+		 	}
 		}
-		else{
-	 		//tiles_[a] = 0;
-	 		//tiles_[b] = tile;
-	 		//move here
-	 		//add to counter
-	 	}
+		else
+		{
+			continue;
+			//do nothing
+		}
 	}
-	else
+	for(int i=0; i<size; i++)
 	{
-		//do nothing
+		gw->getScene()->addItem(tiles[i]);
 	}
-	
-	}
-		}
 	}
 	
 }
