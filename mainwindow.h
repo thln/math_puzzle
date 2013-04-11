@@ -8,7 +8,7 @@
 #include "formlayout.h"
 #include <QDockWidget>
 #include <QWidget>
-//#include "guitile.h"
+#include "guitile.h"
 #include <QRadioButton>
 #include <QHBoxLayout>
 
