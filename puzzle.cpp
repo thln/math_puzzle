@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <cstdlib>
 #include <deque>
@@ -27,7 +28,8 @@ using namespace std;
 	* Implement the cheat
 	* Make sure there are no memory leaks
 	* Document using Doxygen*/
- 
+
+/* 
 int main(int argc, char *argv[])
 {
   if(argc < 3){
@@ -56,7 +58,7 @@ test.push(PM2);
 cout << test.top() << endl;
 test.pop();
 cout << test.top() << endl;
-*/
+
 
   //**** Implement the gameplay here
 
@@ -96,3 +98,5 @@ cout << test.top() << endl;
 
   return 0;
 }
+
+*/
