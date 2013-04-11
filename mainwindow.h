@@ -11,6 +11,8 @@
 #include "guitile.h"
 #include <QRadioButton>
 #include <QHBoxLayout>
+#include <QPlainTextEdit>
+#include <QGraphicsRectItem>
 
 using namespace std;
 
@@ -29,6 +31,8 @@ private:
 	QRadioButton *mhChoice;
 	QRadioButton *ooohChoice;
 	QHBoxLayout *horlayout;
+	QPlainTextEdit *tempOutput;
+	QGraphicsRectItem *tiles[17];
 
 public slots:
 	void startGame();

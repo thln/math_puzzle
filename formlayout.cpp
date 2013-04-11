@@ -23,6 +23,26 @@ formlayout::formlayout()
 
 }
 
+QFormLayout *formlayout::getLayout()
+{
+	return layout;
+}
+	
+QLineEdit *formlayout::getSizeEdit()
+{
+	return sizeEdit;
+}
+
+QLineEdit *formlayout::getStartMovesEdit()
+{
+	return startMovesEdit;
+}
+
+QLineEdit *formlayout::getRandomSeedEdit()
+{
+	return randomSeedEdit;
+}
+
 formlayout::~formlayout()
 {
 

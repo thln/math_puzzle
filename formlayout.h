@@ -16,12 +16,16 @@ class formlayout : public QWidget {
 public:
 	formlayout();
 	~formlayout();
+	QFormLayout *getLayout();
+	QLineEdit *getSizeEdit();
+	QLineEdit *getStartMovesEdit();
+	QLineEdit *getRandomSeedEdit();
 	
 private:
-	QFormLayout* layout;
-	QLineEdit* sizeEdit;
-	QLineEdit* startMovesEdit;
-	QLineEdit* randomSeedEdit;
+	QFormLayout *layout;
+	QLineEdit *sizeEdit;
+	QLineEdit *startMovesEdit;
+	QLineEdit *randomSeedEdit;
 
 public slots:
 

@@ -138,6 +138,11 @@ void GraphicsWindow::show() {
     this->show();
 }
 
+QGraphicsScene *GraphicsWindow::getScene()
+{
+	return scene;
+}
+
 GraphicsWindow::~GraphicsWindow()
 {
     timer->stop();

@@ -29,7 +29,7 @@ class GraphicsWindow : public QGraphicsView {
 public:
     explicit GraphicsWindow();
     ~GraphicsWindow();
-
+	QGraphicsScene *getScene();
     void show();
     
 private:
