@@ -113,17 +113,16 @@ void GraphicsWindow::moveTile(GUITile* piece1)
 	{
 		if((tempX+100) == zeroX || (tempX-100) == zeroX)
 		{
-		QBrush redBrush(Qt::red);
-		QBrush greenBrush(Qt::green);
+
 			tiles[zero_index]->setPos(tempX, tempY);
 			tiles[zero_index]->setxCord(tempX);
 			tiles[zero_index]->setyCord(tempY);
-//				tiles[zero_index]->setBrush(redBrush);
+
 
 			piece1->setPos(zeroX, zeroY);	
 			piece1->setxCord(zeroX);
 			piece1->setyCord(zeroY);
-//				piece1->setBrush(greenBrush);
+
 			
 //			GUITile *temp;
 //			temp = tiles[zero_index];
@@ -139,12 +138,12 @@ void GraphicsWindow::moveTile(GUITile* piece1)
 			tiles[zero_index]->setPos(tempX, tempY);
 			tiles[zero_index]->setxCord(tempX);
 			tiles[zero_index]->setyCord(tempY);
-//			tiles[zero_index]->setBrush(redBrush);
+
 			
 			piece1->setPos(zeroX, zeroY);	
 			piece1->setxCord(zeroX);
 			piece1->setyCord(zeroY);
-//			piece1->setBrush(greenBrush);
+
 			
 //			GUITile *temp;
 //			temp = tiles[zero_index];
