@@ -113,18 +113,25 @@ void GraphicsWindow::moveTile(GUITile* piece1)
 	{
 		if((tempX+100) == zeroX || (tempX-100) == zeroX)
 		{
+		QBrush redBrush(Qt::red);
+		QBrush greenBrush(Qt::green);
 			tiles[zero_index]->setPos(tempX, tempY);
 			tiles[zero_index]->setxCord(tempX);
 			tiles[zero_index]->setyCord(tempY);
+//				tiles[zero_index]->setBrush(redBrush);
+
 			piece1->setPos(zeroX, zeroY);	
-			piece1->setxCord(tempX);
-			piece1->setyCord(tempY);
+			piece1->setxCord(zeroX);
+			piece1->setyCord(zeroY);
+//				piece1->setBrush(greenBrush);
 			
-			GUITile *temp;
-			temp = tiles[zero_index];
-			tiles[zero_index] = tiles[piece_index];
-			tiles[piece_index] = temp;
+//			GUITile *temp;
+//			temp = tiles[zero_index];
+//			tiles[zero_index] = tiles[piece_index];
+//			tiles[piece_index] = temp;
+			
 		}
+		
 		else if((tempY+100) == zeroY || (tempY-100) == zeroY)
 		{
 		QBrush redBrush(Qt::red);
@@ -132,17 +139,18 @@ void GraphicsWindow::moveTile(GUITile* piece1)
 			tiles[zero_index]->setPos(tempX, tempY);
 			tiles[zero_index]->setxCord(tempX);
 			tiles[zero_index]->setyCord(tempY);
-			tiles[zero_index]->setBrush(redBrush);
+//			tiles[zero_index]->setBrush(redBrush);
 			
 			piece1->setPos(zeroX, zeroY);	
-			piece1->setxCord(tempX);
-			piece1->setyCord(tempY);
-			piece1->setBrush(greenBrush);
+			piece1->setxCord(zeroX);
+			piece1->setyCord(zeroY);
+//			piece1->setBrush(greenBrush);
 			
-			GUITile *temp;
-			temp = tiles[zero_index];
-			tiles[zero_index] = tiles[piece_index];
-			tiles[piece_index] = temp;	
+//			GUITile *temp;
+//			temp = tiles[zero_index];
+//			tiles[zero_index] = tiles[piece_index];
+//			tiles[piece_index] = temp;
+				
 		}
 	
 	}

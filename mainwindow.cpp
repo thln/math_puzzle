@@ -134,6 +134,7 @@ void MainWindow::startGame()
 		QPen blackPen(Qt::black);
   		QBrush blueBrush(Qt::blue);
   		QBrush whiteBrush(Qt::white);
+  		QBrush yellowBrush(Qt::yellow);
   		int index = 0;
   			srand(randSeed);
 //  		tempOutput->appendPlainText("DIM: "+ QString::number(dim));
@@ -153,7 +154,8 @@ void MainWindow::startGame()
 			}
 			else
 			{
-				gw->getTilesAt(index)->setBrush(whiteBrush);
+			//	gw->getTilesAt(index)->setBrush(whiteBrush);
+				gw->getTilesAt(index)->setBrush(yellowBrush);
 				gw->getTilesAt(index)->setPen(blackPen);			
 			}
 			gw->getScene()->addItem(gw->getTiles()[index]);
