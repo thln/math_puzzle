@@ -9,6 +9,7 @@
 #include <QWidget>
 #include <QString>
 #include <math.h>
+#include "board.h"
 
 using namespace std;
 
@@ -39,11 +40,11 @@ MainWindow::MainWindow()
 //---------------------------------------------------------------
 //Radio Buttons between Heuristics
 	mhChoice = new QRadioButton(tr("&Manhattan Heuristic"), this);
-	connect(mhChoice, SIGNAL(clicked(bool)), this, SLOT(clickedstate(bool)));
+	connect(mhChoice, SIGNAL(clicked(bool)), this, SLOT(clickedstate()));
 	mhChoice->setAutoExclusive(false);
 
 	ooohChoice = new QRadioButton(tr("&Out Of Order Heuristic"), this);
-	connect( ooohChoice, SIGNAL(clicked(bool)), this, SLOT(clickedstate(bool)));
+	connect( ooohChoice, SIGNAL(clicked(bool)), this, SLOT(clickedstate()));
 	ooohChoice->setAutoExclusive(false);
 
 	mhChoice->setChecked(false);
@@ -94,10 +95,16 @@ MainWindow::~MainWindow()
 
 void MainWindow::startGame()
 {
+
+//	delete gw;
+//	gw = new GraphicsWindow;
+//	setCentralWidget(gw);
+	
+
 //Takes inputs from lineedits and store them in respective values
-	int size = textfields->getSizeEdit()->text().toInt();
-	int randMoves = textfields->getStartMovesEdit()->text().toInt();
-	int randSeed = textfields->getRandomSeedEdit()->text().toInt();
+	size = textfields->getSizeEdit()->text().toInt();
+	randMoves = textfields->getStartMovesEdit()->text().toInt();
+	randSeed = textfields->getRandomSeedEdit()->text().toInt();
 	
 //Printing out error messages if any
 	tempOutput->appendPlainText("Size: "+ QString::number(size));
@@ -107,22 +114,28 @@ void MainWindow::startGame()
 	if(randMoves <= 0)
 	{
 		tempOutput->appendPlainText("Error: Needs a Start Move value greater than 0.");
+	//	return 0;
 	}
 	else if(randSeed <= 0)
 	{
 		tempOutput->appendPlainText("Error: Needs a Random Seed value greater than 0.");
+	//	return 0;
 	}
 	else if(size != 9 && size != 16)
 	{
 		tempOutput->appendPlainText("Error: Size can only be of 3x3(9) or 4x4(16).");
+	//	return 0;
 	}
 	else
 	{
 		tempOutput->appendPlainText("Game will now begin!");
+		gw->setBoard(new Board(size, randMoves, randSeed));
 		int dim = sqrt(size);
 		QPen blackPen(Qt::black);
   		QBrush blueBrush(Qt::blue);
+  		QBrush whiteBrush(Qt::white);
   		int index = 0;
+  			srand(randSeed);
 //  		tempOutput->appendPlainText("DIM: "+ QString::number(dim));
  
 //making the tiles 		
@@ -130,13 +143,20 @@ void MainWindow::startGame()
 		{
 			for(int j=0; j<dim; j++)
 			{ 
-			tiles[index] = new GUITile(gw, index, 10.0+(j*(360.0/dim)), 10.0+(i*(360.0/dim)), 360.0/dim, 360.0/dim);
+			gw->setTilesAt(index, new GUITile(gw, gw->getBoard()->getTiles()[index], (j*(100)), (i*(100)), 100, 100));
 			
-			if(index != 0)
+			if(gw->getBoard()->getTiles()[index] != 0)
 			{
-				tiles[index]->setBrush(blueBrush);
-				tiles[index]->setPen(blackPen);
+			//supposed to be -> ?
+				gw->getTilesAt(index)->setBrush(blueBrush);
+				gw->getTilesAt(index)->setPen(blackPen);
 			}
+			else
+			{
+				gw->getTilesAt(index)->setBrush(whiteBrush);
+				gw->getTilesAt(index)->setPen(blackPen);			
+			}
+			gw->getScene()->addItem(gw->getTiles()[index]);
 //			gw->getScene()->addItem(tiles[index]);
 			index++;
 //			tempOutput->appendPlainText(QString::number(index));
@@ -144,48 +164,32 @@ void MainWindow::startGame()
 //		tempOutput->appendPlainText(QString::number(index));
 		}
 
-	//Scrambling time
-	int counter=0;
-	int zero_Index=0;
-	srand(randSeed);
-	while(counter != randMoves)
-	{
-		int temp_index = rand()%size;
-		if( zero_Index == temp_index+dim || zero_Index == temp_index-dim || zero_Index == temp_index+1 || zero_Index == temp_index-1)
-		{
-		//Checks if numbers are on the "edge"
-			if((zero_Index%dim == 0 && temp_index%dim == dim-1) || (temp_index%dim == 0 && zero_Index%dim == dim-1))
-			{
-				continue;
-	//			cout << "Incorrect tile movement." << endl;
-			}
-			else{
-tempOutput->appendPlainText("Temp: "+ QString::number(temp_index));
-				GUITile *temp = new GUITile;
-				temp = tiles[temp_index];
-				tiles[temp_index] = tiles[zero_Index];
-				tiles[zero_Index] = temp;
-				zero_Index = temp_index;
-				counter++;
-		 		//tiles_[a] = 0;
-		 		//tiles_[b] = tile;
-		 		//move here
-		 		//add to counter
-		 	}
-		}
-		else
-		{
-			continue;
-			//do nothing
-		}
-	}
 	for(int i=0; i<size; i++)
 	{
-		gw->getScene()->addItem(tiles[i]);
+	tempOutput->appendPlainText(QString::number(gw->getTilesAt(i)->getValue()));
+	tempOutput->appendPlainText("X Coordinate: " + QString::number(gw->getTilesAt(i)->getxCord()));
+	tempOutput->appendPlainText("Y Coordinate: " + QString::number(gw->getTilesAt(i)->getyCord()));
 	}
+
 	}
-	
 }
+
+/*
+GUITiles* MainWindow::getTiles()
+{
+	return tiles[];
+}
+
+Board* MainWindow::getBoard()
+{
+	return b;
+}
+
+int MainWindow::getSize()
+{
+	return size;
+}
+*/
 
 void MainWindow::cheatGame()
 {

@@ -8,7 +8,7 @@
 #include "formlayout.h"
 #include <QDockWidget>
 #include <QWidget>
-#include "guitile.h"
+//#include "guitile.h"
 #include <QRadioButton>
 #include <QHBoxLayout>
 #include <QPlainTextEdit>
@@ -21,18 +21,25 @@ class MainWindow : public QMainWindow {
     
 public:
 	MainWindow();
-	GraphicsWindow *gw;
 	~MainWindow();
+//	Board* getBoard();
+//	GUITile* getTiles();
+	int getSize();
 	
 private:
 	QDockWidget *lqdw;
 	formlayout *textfields;
 	QToolBar *tool;
+	GraphicsWindow *gw;
 	QRadioButton *mhChoice;
 	QRadioButton *ooohChoice;
 	QHBoxLayout *horlayout;
 	QPlainTextEdit *tempOutput;
-	GUITile *tiles[16];
+//	GUITile *tiles[16];
+//	Board *b;
+	int size;
+	int randMoves;
+	int randSeed;
 
 public slots:
 	void startGame();

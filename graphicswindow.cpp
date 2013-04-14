@@ -6,70 +6,20 @@
 
 void GraphicsWindow::handleTimer() {
 //  item->move(WINDOW_MAX_X, WINDOW_MAX_Y);
-    counter++;
-
-
-	QBrush redBrush(Qt::red);
-    QBrush blueBrush(Qt::blue);
-    QBrush yellowBrush(Qt::yellow);
-    QBrush greenBrush(Qt::green);
-
-	enum Colors
-	{
-		COLOR_RED,
-		COLOR_BLUE,
-		COLOR_YELLOW,
-		COLOR_GREEN,
-	};
-	
-	for(int i=0; i<RectangleVector.size(); i++)
-	{
-		RectangleVector[i]->move(WINDOW_MAX_X, WINDOW_MAX_Y);
-	}
-
-	Colors eColors = Colors(rand()%4);
-
-	//Generate random squares
-	srand(time(NULL));
-	
-	if(counter%50 == 0)
-	{
-		item = new BouncingRectangle(rand()%200, rand()%200, rand()%200, rand()%200, rand()%5, rand()%5);
-		switch(eColors)
-		{
-			case COLOR_RED:
-				item->setBrush(redBrush);
-				scene->addItem(item);
-				break;
-			case COLOR_BLUE:
-				item->setBrush(blueBrush);
-				scene->addItem(item);
-				break;
-			case COLOR_YELLOW:
-				item->setBrush(yellowBrush);
-				scene->addItem(item);
-				break;
-			case COLOR_GREEN:
-				item->setBrush(greenBrush);
-				scene->addItem(item);
-				break;
-		}
-		RectangleVector.push_back(item);
-	}
-
+//    counter++;
 }
 
 //clicking will make the timer stop or start
 void GraphicsWindow::clicker()
 {
-	if(timer->isActive())
-	{
-		timer->stop();
-	}
-	else if(!timer->isActive())
-	{
-		timer->start();
-	}
+//	if(timer->isActive())
+//	{
+//		timer->stop();
+//	}
+//	else if(!timer->isActive())
+//	{
+//		timer->start();
+//	}
 }
 
 GraphicsWindow::GraphicsWindow()  {
@@ -86,53 +36,14 @@ GraphicsWindow::GraphicsWindow()  {
     QBrush yellowBrush(Qt::yellow);
     QBrush greenBrush(Qt::green);
 
-    //First 2 arguments are the x, y, of the upper left of the rectangle.
-    //The second 2 arguments are the width and height
-    //The last 2 arguments are the velocity in the x, and y, directions
-   // Inserting boxes into a 360x360 pixel area
-    box1 = new QGraphicsRectItem( 10.0, 10.0, 180.0, 180.0);
-    box1->setBrush(redBrush);
-    box1->setPen(blackPen);
-    scene->addItem(box1);
-    box2 = new QGraphicsRectItem( 190.0, 10.0, 180.0, 180.0);
-    box2->setBrush(redBrush);
-    box2->setPen(blackPen);
-    scene->addItem(box2);
-    box3 = new QGraphicsRectItem( 10.0, 190.0, 180.0, 180.0);
-    box3->setBrush(redBrush);
-    box3->setPen(blackPen);
-    scene->addItem(box3);
-    box4 = new QGraphicsRectItem( 190.0, 190.0, 180.0, 180.0);
-    box4->setBrush(redBrush);
-    box4->setPen(blackPen);
-    scene->addItem(box4);
-
-    //This sets the size of the window and gives it a title.
-    setFixedSize( WINDOW_MAX_X*2, WINDOW_MAX_Y*2 );
-
-    //This is how we do animation. We use a timer with an interval of 5 milliseconds
-    //We connect the signal from the timer - the timeout() function to a function
-    //of our own - called handleTimer - which is in this same MainWindow class
-//    timer = new QTimer(this);
-//    timer->setInterval(5);
-    
-    //making a new button and giving it characteristics
-//    buttonclick = new QPushButton(this);
-//    buttonclick->setText("Start or Stop");
-//    buttonclick->setGeometry(0, 0, 180, 60);
-//    connecting timer to handletimer and buttonclick to a clicker via clicked
-//    connect(timer, SIGNAL(timeout()), this, SLOT(handleTimer()));
-//    connect(buttonclick, SIGNAL(clicked()), this, SLOT(clicker()));
-
-
-	
+  	
 }
 
 
 void GraphicsWindow::show() {
     //This is only called once by main. Timers don't start working until
     //we call start
-    timer->start();
+//    timer->start();
 
     //This is how we get our view displayed.
     this->show();
@@ -143,70 +54,156 @@ QGraphicsScene *GraphicsWindow::getScene()
 	return scene;
 }
 
-void GraphicsWindow::move(int tile)
+void GraphicsWindow::moveTile(GUITile* piece1)
 {
-/*
-  int dim = static_cast<int>(sqrt(size_));
+	int zeroX = 0;
+	int zeroY = 0;
+	int tempX = piece1->getxCord();
+	int tempY = piece1->getyCord();
+	int zero_index = 0;
+	int piece_index = 0;
 
-	//checking if tile is in the game or not
-	if(tile<-1 || tile>(size_))
+   int value_ = piece1->getValue();
+   b->move(value_);
+
+	for(int j=0; j< b->getSize(); j++)
 	{
-		cout << "Tile does not exist." << endl;
+		if(tiles[j]->getValue() == 0)
+		{
+			zeroX = tiles[j]->getxCord();
+			zeroY = tiles[j]->getyCord();
+			zero_index = j;
+		}
 	}
-	else{
 	
-	//looping through all tiles
-	//variables keeping track of tiles to swap
-	int a, b;
-	for(int i=0; i<size_; i++)
+	for(int j=0; j< b->getSize(); j++)
 	{
-		//finding shown tile
-		if(tile == tiles_[i])
+		if(tiles[j]->getValue() == value_)
 		{
-		a = i;
+			piece_index = j;
 		}
-		//finding zero tile
-		if(0 == tiles_[i])
+	}
+/*	
+	int xDiff = tempX-zeroX;
+	int yDiff = tempY-zeroY;
+	if( (xDiff==0 && yDiff==100) || (xDiff==0 && yDiff==-100) || (xDiff==100 && yDiff==0) || (xDiff==-100 && yDiff==0))
+	{
+			tiles[zero_index]->setPos(tempX, tempY);
+			tiles[zero_index]->setxCord(tempX);
+			tiles[zero_index]->setyCord(tempY);
+			//tiles[zero_index]->update(tempX, tempY, 100, 100);
+			piece1->setPos(zeroX, zeroY);	
+			//piece1->update(tempX, tempY, 100, 100);
+			piece1->setxCord(tempX);
+			piece1->setyCord(tempY);
+			
+			GUITile *temp;
+			temp = tiles[zero_index];
+			tiles[zero_index] = tiles[piece_index];
+			tiles[piece_index] = temp;
+			
+//			scene->addItem(piece1);
+//			scene->addItem(tiles[zero_index]);
+	} 
+*/	
+	
+	
+	
+	if(tempX == zeroX || tempY == zeroY)
+	{
+		if((tempX+100) == zeroX || (tempX-100) == zeroX)
 		{
-		b = i;
+			tiles[zero_index]->setPos(tempX, tempY);
+			tiles[zero_index]->setxCord(tempX);
+			tiles[zero_index]->setyCord(tempY);
+			piece1->setPos(zeroX, zeroY);	
+			piece1->setxCord(tempX);
+			piece1->setyCord(tempY);
+			
+			GUITile *temp;
+			temp = tiles[zero_index];
+			tiles[zero_index] = tiles[piece_index];
+			tiles[piece_index] = temp;
 		}
+		else if((tempY+100) == zeroY || (tempY-100) == zeroY)
+		{
+		QBrush redBrush(Qt::red);
+		QBrush greenBrush(Qt::green);
+			tiles[zero_index]->setPos(tempX, tempY);
+			tiles[zero_index]->setxCord(tempX);
+			tiles[zero_index]->setyCord(tempY);
+			tiles[zero_index]->setBrush(redBrush);
+			
+			piece1->setPos(zeroX, zeroY);	
+			piece1->setxCord(tempX);
+			piece1->setyCord(tempY);
+			piece1->setBrush(greenBrush);
+			
+			GUITile *temp;
+			temp = tiles[zero_index];
+			tiles[zero_index] = tiles[piece_index];
+			tiles[piece_index] = temp;	
+		}
+	
+	}
 		
-	}
-	//Checks if two tiles are next to each other
-	if( a == b+sqrt(size_) || a == b-sqrt(size_) || a == b+1 || a == b-1)
-	{
-	//Checks if numbers are on the "edge"
-		//Special 2 square case
-		if(size_ == 4)
-		{
-			if( (a==0 && b==3) || (b==0 && a==3) || (a==1 && b==2) || (b==1 && a==2) )
-			{
-			cout << "Incorrect tile movement." << endl;
-			}
-			else
-			{
-			tiles_[a] = 0;
-	 		tiles_[b] = tile;
-			}
-		}
-		else if((a%dim == 0 && b%dim == dim-1) || (b%dim == 0 && a%dim == dim-1))
-		{
-			cout << "Incorrect tile movement." << endl;
-		}
-		else{
-	 		tiles_[a] = 0;
-	 		tiles_[b] = tile;
-	 	}
-	}
-	}
-*/
+
+	zeroX = 0;
+	zeroY = 0;
+	tempX = 0;
+	tempY = 0;
+	zero_index = 0;
+	piece_index = 0;
+
 }
+
+GUITile** GraphicsWindow::getTiles()
+{
+	return tiles;
+}
+
+GUITile* GraphicsWindow::getTilesAt(int index)
+{
+	return tiles[index];
+}
+
+Board* GraphicsWindow::getBoard()
+{
+	return b;
+}
+
+void GraphicsWindow::setBoard(Board *b_)
+{
+	b = b_;
+}
+
+void GraphicsWindow::setTilesAt(int index, GUITile *piece)
+{
+	tiles[index] = piece;
+}
+
+/*
+int GraphicsWindow::getSize()
+{
+	return size;
+}
+
+int GraphicsWindow::getRandMoves()
+{
+	return randMoves;
+}
+
+int GraphicsWindow::getRandSeed()
+{
+	return randSeed;
+}
+*/
 
 GraphicsWindow::~GraphicsWindow()
 {
     timer->stop();
     delete timer;
-    delete item;
+//    delete item;
     delete scene;
 }
 
