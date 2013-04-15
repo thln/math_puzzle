@@ -181,6 +181,13 @@ return Solutions.getSize();
 //	return;
 }
 
+/**getSolutions
+	* returns Solutions LinkedList */
+MyList<int> PuzzleSolver::getSolutions()
+{
+	return Solutions;
+}
+
 /** getNumExpansions
 	* returns number of expansions */
 int PuzzleSolver::getNumExpansions()

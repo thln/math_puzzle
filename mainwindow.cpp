@@ -78,7 +78,7 @@ MainWindow::MainWindow()
 
 	QDockWidget *rqdw = new QDockWidget();
 	rqdw->setWidget(tempOutput);
-	addDockWidget(Qt::BottomDockWidgetArea, rqdw);
+	addDockWidget(Qt::RightDockWidgetArea, rqdw);
 	rqdw->setFeatures(QDockWidget::NoDockWidgetFeatures);
 
 //--------------------------------------------------------------
@@ -164,12 +164,12 @@ void MainWindow::startGame()
 //		tempOutput->appendPlainText(QString::number(index));
 		}
 
-	for(int i=0; i<size; i++)
-	{
-	tempOutput->appendPlainText(QString::number(gw->getTilesAt(i)->getValue()));
-	tempOutput->appendPlainText("X Coordinate: " + QString::number(gw->getTilesAt(i)->getxCord()));
-	tempOutput->appendPlainText("Y Coordinate: " + QString::number(gw->getTilesAt(i)->getyCord()));
-	}
+//	for(int i=0; i<size; i++)
+//	{
+//	tempOutput->appendPlainText(QString::number(gw->getTilesAt(i)->getValue()));
+//	tempOutput->appendPlainText("X Coordinate: " + QString::number(gw->getTilesAt(i)->getxCord()));
+//	tempOutput->appendPlainText("Y Coordinate: " + QString::number(gw->getTilesAt(i)->getyCord()));
+//	}
 
 	}
 }
@@ -196,10 +196,26 @@ void MainWindow::cheatGame()
 	if(mhChoice->isChecked())
 	{
 		tempOutput->appendPlainText("Manhattan Cheat!");
+		ManhattanHeuristic *MH = new ManhattanHeuristic;
+		PuzzleSolver* Answer = new PuzzleSolver(*(gw->getBoard()));
+		Answer->run(MH);
+		tempOutput->appendPlainText("Try this: ");
+		for(int i=( Answer->getSolutions().getSize()-1 ); i>=0; i--)
+		{
+		tempOutput->appendPlainText(QString::number(Answer->getSolutions()[i]));
+		}
 	}
 	else if(ooohChoice->isChecked())
 	{
 		tempOutput->appendPlainText("Out of Order Cheat!");
+		OutOfPlaceHeuristic *OOPH = new OutOfPlaceHeuristic;
+		PuzzleSolver* Answer = new PuzzleSolver(*(gw->getBoard()));
+		Answer->run(OOPH);
+		tempOutput->appendPlainText("Try this: ");
+		for(int i=( Answer->getSolutions().getSize()-1 ); i>=0; i--)
+		{
+		tempOutput->appendPlainText(QString::number(Answer->getSolutions()[i]));
+		}
 	}
 	else if(size != 9 && size != 16)
 	{

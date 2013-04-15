@@ -13,6 +13,8 @@
 #include <QHBoxLayout>
 #include <QPlainTextEdit>
 #include <QGraphicsRectItem>
+#include "puzzle_solver.h"
+#include "puzzle_heur.h"
 
 using namespace std;
 
@@ -40,6 +42,7 @@ private:
 	int size;
 	int randMoves;
 	int randSeed;
+
 
 public slots:
 	void startGame();

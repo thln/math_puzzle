@@ -37,6 +37,9 @@ class PuzzleSolver
 
   /** Return how many expansions were performed in the search */
   int getNumExpansions();
+  
+  /** Get Solution Linked List */
+  MyList<int> getSolutions();
 
  private:
  /** Keeps track of board */
