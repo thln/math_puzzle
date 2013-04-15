@@ -46,7 +46,7 @@ GUITile::GUITile(GraphicsWindow *p, int val, qreal nx, qreal ny, qreal w, qreal 
 
 
 	timer = new QTimer();
-	connect(timer, SIGNAL (timeout()), this, moveTilesAnimate());	
+//	connect(timer, SIGNAL (timeout()), this, moveTilesAnimate());	
 }
 
 /** Default destructor
@@ -122,5 +122,5 @@ void GUITile::moveTilesAnimate()
 	timer->start();
 //	this
 	
-	timer->stop():
+	timer->stop();
 }
