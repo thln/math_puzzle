@@ -112,6 +112,7 @@ void GUITile::setyCord(double y)
 void GUITile::mousePressEvent(QGraphicsSceneMouseEvent* event)
 {
 	parent->moveTile(this);
+	event = event;
 //	QGraphicsScene::mousePressedEvent(event);
 }
 

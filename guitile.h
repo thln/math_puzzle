@@ -43,6 +43,7 @@ private:
 	int yCord; /** the upper left y coordinate of the tile*/
 	int width; /** the width of the tile*/
 	int height; /** the height of the tile*/
+	QGraphicsSceneMouseEvent* event;
 
 public slots:
 	void moveTilesAnimate(); /** Used to animate tiles */
