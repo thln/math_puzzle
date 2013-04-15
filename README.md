@@ -1,12 +1,14 @@
 # Puzzle - Programming Assignments Private Repository
 ### Student Information
-  + Name: Tommy Trojan
-  + USC Email: ttrojan@usc.edu
-  + USC ID: 0123456789
+  + Name: Tam Henry Le Nguyen
+  + USC Email: tamnguye@usc.edu
+  + USC ID: 6154285255
 
 ### Compile & Run Instructions
 The grader should use the following procedure to compile and run the code:
 ```shell
+qmake -project
+qmake
 make
-./puzzle size initMoves seed
+./test_puzzle (The name of the folder)
 ```
