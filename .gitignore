@@ -47,3 +47,11 @@ Desktop.ini
 .DS_Store
 .Trashes
 .Trash
+
+test_puzzle
+moc_formlayout.cpp
+moc_graphicswindow.cpp
+moc_guitile.cpp
+moc_mainwindow.cpp
+test_puzzle.pro
+Makefile
