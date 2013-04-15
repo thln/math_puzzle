@@ -75,7 +75,7 @@ int PuzzleSolver::run(PuzzleHeuristic *ph)
 		if(move->b_->solved())
 		{
 
-		cout <<"Solved!" << endl;
+//		cout <<"Solved!" << endl;
 //		cout<< "LALA4" << endl;
 			//PuzzleMove *temp = new PuzzleMove(mov
 			//trace path backwards
@@ -105,7 +105,7 @@ int PuzzleSolver::run(PuzzleHeuristic *ph)
 			//for(it = move; it != StartState; ++it)
 			while(temp->prev_ != NULL)
 			{
-		cout<< "Adding to Solutions List" << endl;
+//		cout<< "Adding to Solutions List" << endl;
 //		cout << "Temp's tileMove " << temp->tileMove_ << endl;
 				Solutions.push_back(temp->tileMove_);
 				temp = temp->prev_;
@@ -116,7 +116,7 @@ int PuzzleSolver::run(PuzzleHeuristic *ph)
 			break;
 		}
 		
-		cout<< "Not Solved Yet" << endl;
+//		cout<< "Not Solved Yet" << endl;
 		
 //		cout<<*(move->b_)<<endl;
 		

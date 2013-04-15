@@ -201,7 +201,7 @@ int zeroIndex;
  	if(this->tiles_[i] == 0)
  	{
  		zeroIndex = i;
- 		cout << "ZeroIndex is at: " << i << endl;
+ //		cout << "ZeroIndex is at: " << i << endl;
  		break;
  	}
  }
@@ -215,10 +215,10 @@ int zeroIndex;
  else
  {
 
-   	cout << "     Board1" << endl;
+//   	cout << "     Board1" << endl;
  	Board *Board1 = new Board(*this);
  	int temp = zeroIndex-1;
- 	cout << "Tile is: " << this->tiles_[temp] << endl;
+// 	cout << "Tile is: " << this->tiles_[temp] << endl;
  	Board1->move(this->tiles_[temp]);
  	mymap[(this->tiles_[zeroIndex-1])] = Board1;
  }
@@ -230,10 +230,10 @@ int zeroIndex;
  }
  else
  {
-  	cout << "     Board2" << endl;
+//  	cout << "     Board2" << endl;
  	Board *Board2 = new Board(*this);
  	int temp = zeroIndex+1;
- 	cout << "Tile is: " << this->tiles_[temp] << endl;
+// 	cout << "Tile is: " << this->tiles_[temp] << endl;
  	Board2->move(this->tiles_[temp]);
  	mymap[(this->tiles_[zeroIndex+1])] = Board2;
  } 
@@ -245,10 +245,10 @@ int zeroIndex;
  }
  else
  {
-  	cout << "     Board3" << endl;
+//  	cout << "     Board3" << endl;
  	Board *Board3 = new Board(*this);
  	int temp = zeroIndex-dim;
- 	cout << "Tile is: " << this->tiles_[temp] << endl;
+// 	cout << "Tile is: " << this->tiles_[temp] << endl;
  	Board3->move(this->tiles_[temp]);
  	mymap[(this->tiles_[zeroIndex-dim])] = Board3;
  } 
@@ -259,10 +259,10 @@ int zeroIndex;
  }
  else
  {
-  	cout << "     Board4" << endl;
+//  	cout << "     Board4" << endl;
  	Board *Board4 = new Board(*this);
  	int temp = zeroIndex+dim;
- 	cout << "Tile is: " << this->tiles_[temp] << endl;
+// 	cout << "Tile is: " << this->tiles_[temp] << endl;
  	Board4->move(this->tiles_[temp]);
  	mymap[(this->tiles_[zeroIndex+dim])] = Board4;
  } 
