@@ -6,7 +6,7 @@
 #include <QGraphicsSceneMouseEvent>
 #include "graphicswindow.h"
 #include <QFont>
-#include <QObject>
+//#include <QObject>
 
 
 using namespace std;
@@ -18,8 +18,8 @@ class GraphicsWindow;
 	* @author Tam Henry Le Nguyen */
 
 
-class GUITile : public QGraphicsRectItem {
-//    Q_OBJECT
+class GUITile : public QObject, public QGraphicsRectItem {
+   Q_OBJECT
     
 public:
 	GUITile(); /** Default Constructor */
@@ -34,6 +34,11 @@ public:
 	void setxCord(double x); /** X Coordinate Resetter */
 	void setyCord(double y); /** Y Coordinate Resetter */	
 	QTimer *timer; /** Timer */
+	
+	void setVelocityX(double vx);
+	void setVelocityY(double vy);
+	void setDestinationX( int dx);
+	void setDestinationY( int dy);
 
 private:
 	GraphicsWindow *parent; /** Pointer to the window the element is in*/
@@ -43,7 +48,11 @@ private:
 	int yCord; /** the upper left y coordinate of the tile*/
 	int width; /** the width of the tile*/
 	int height; /** the height of the tile*/
-	QGraphicsSceneMouseEvent* event;
+	double velocityX;
+	double velocityY;
+	int destinationX;
+	int destinationY;
+	QGraphicsSceneMouseEvent* event; /** to handle the event */
 
 public slots:
 	void moveTilesAnimate(); /** Used to animate tiles */

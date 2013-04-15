@@ -143,7 +143,7 @@ void MainWindow::startGame()
 			}
 			else
 			{
-				gw->getTilesAt(index)->setBrush(yellowBrush);
+				gw->getTilesAt(index)->setBrush(whiteBrush);
 				gw->getTilesAt(index)->setPen(blackPen);			
 			}
 			gw->getScene()->addItem(gw->getTiles()[index]);

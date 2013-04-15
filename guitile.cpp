@@ -40,13 +40,12 @@ GUITile::GUITile(GraphicsWindow *p, int val, qreal nx, qreal ny, qreal w, qreal 
 	numbers->setBrush(whiteBrush);	
 	}
 	setPos(xCord, yCord);
-	update(xCord, yCord, width, height);
-	//numbers->setPos(xCord, yCord);
-	//numbers->update(xCord, yCord, width, height);
+	//update(xCord, yCord, width, height);
 
 
-	timer = new QTimer();
-//	connect(timer, SIGNAL (timeout()), this, moveTilesAnimate());	
+	timer = new QTimer(this);
+	timer->setInterval(1);
+	connect(timer, SIGNAL(timeout()), this, SLOT(moveTilesAnimate()));	
 }
 
 /** Default destructor
@@ -98,13 +97,40 @@ void GUITile::setxCord(double x)
 	xCord = x;
 }
 
-/** Cord Resetter
+/** YCord Resetter
 	* @param y The New y Coordinate you want to set */
 void GUITile::setyCord(double y)
 {
 	yCord = y;
 }
 
+/** Velocity X Resetter
+	* @param vx The New x velocity you want to set */
+void GUITile::setVelocityX(double vx)
+{
+	velocityX = vx;
+}
+
+/** Velocity Y Resetter
+	* @param vy The New y velocity you want to set */
+void GUITile::setVelocityY(double vy)
+{
+	velocityY = vy;
+}
+
+/** Destination X Resetter
+	* @param dx The New x coordinate Destination you want to set */
+void GUITile::setDestinationX( int dx)
+{
+	destinationX = dx;
+}
+
+/** Destination Y Resetter
+	* @param dy The New x coordinate Destination you want to set */
+void GUITile::setDestinationY( int dy)
+{
+	destinationY = dy;
+}
 
 /** mousePressEvent
 	* @param event Does Nothing
@@ -120,8 +146,10 @@ void GUITile::mousePressEvent(QGraphicsSceneMouseEvent* event)
 	*Animates the tile */
 void GUITile::moveTilesAnimate()
 {
-	timer->start();
-//	this
+	setPos(xCord+velocityX, yCord+velocityY);
 	
+	if(xCord == destinationX && yCord==destinationY)
+	{
 	timer->stop();
+	}
 }

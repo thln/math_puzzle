@@ -12,3 +12,8 @@ qmake
 make
 ./test_puzzle (The name of the folder)
 ```
+The grader should use the following procedure to generate a a doxygen file:
+```shell
+$ doxygen -g config.txt
+$doxygen config.txt
+```

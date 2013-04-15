@@ -80,14 +80,25 @@ if(!b->solved())
 		if((tempX+100) == zeroX || (tempX-100) == zeroX)
 		{
 
+
+//			piece1->setPos(zeroX, zeroY);	
+//			piece1->setxCord(zeroX);
+//			piece1->setyCord(zeroY);
+
+
+			piece1->setDestinationX(zeroX);
+			piece1->setDestinationY(zeroY);
+			piece1->setVelocityX((zeroX-tempX)/100);
+			piece1->setVelocityY(0);
+			piece1->timer->start();
+//			piece1->moveTilesAnimate();
+
+			piece1->setxCord(zeroX);
+			piece1->setyCord(zeroY);
+
 			tiles[zero_index]->setPos(tempX, tempY);
 			tiles[zero_index]->setxCord(tempX);
 			tiles[zero_index]->setyCord(tempY);
-
-
-			piece1->setPos(zeroX, zeroY);	
-			piece1->setxCord(zeroX);
-			piece1->setyCord(zeroY);
 
 //			QPointF p(zeroX, zeroY);
 //			QRectF r(piece1);
@@ -97,15 +108,24 @@ if(!b->solved())
 		
 		else if((tempY+100) == zeroY || (tempY-100) == zeroY)
 		{
+			
+//			piece1->setPos(zeroX, zeroY);	
+//			piece1->setxCord(zeroX);
+//			piece1->setyCord(zeroY);
+
+			piece1->setDestinationX(zeroX);
+			piece1->setDestinationY(zeroY);
+			piece1->setVelocityY((zeroY-tempY)/100);
+			piece1->setVelocityX(0);
+			piece1->timer->start();
+//			piece1->moveTilesAnimate();
+
+			piece1->setxCord(zeroX);
+			piece1->setyCord(zeroY);
 
 			tiles[zero_index]->setPos(tempX, tempY);
 			tiles[zero_index]->setxCord(tempX);
 			tiles[zero_index]->setyCord(tempY);
-
-			
-			piece1->setPos(zeroX, zeroY);	
-			piece1->setxCord(zeroX);
-			piece1->setyCord(zeroY);
 
 		}
 	
