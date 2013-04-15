@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
 
 
 //Testing pmminlist
-/*
+
 PMMinList test;
 Board Board1;
 Board Board2;
@@ -60,7 +60,7 @@ test.pop();
 cout << test.top() << endl;
 
 
-  //**** Implement the gameplay here
+  // Implement the gameplay here
 
 	cout << "Welcome to the Game!" << endl;
 

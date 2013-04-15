@@ -125,7 +125,8 @@ void Board::move(int tile)
 	
 	//looping through all tiles
 	//variables keeping track of tiles to swap
-	int a, b;
+	int a = 0;
+	int b = 0;
 	for(int i=0; i<size_; i++)
 	{
 		//finding shown tile
@@ -194,7 +195,7 @@ std::map<int, Board*> Board::potentialMoves()
  int dim = (sqrt(this->size_));
 
 //index where zero is
-int zeroIndex;
+int zeroIndex = 0;
 //finds where the zeroIndex is
  for(int i=0; i<this->size_; i++)
  {
