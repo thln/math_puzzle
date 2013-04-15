@@ -10,22 +10,27 @@
    
 using namespace std;
 
+/**
+	* This class is used to keep track of the text grabber to init the game.
+	* Inherits from QWidget.
+	* @author Tam Henry Le Nguyen */
+
 class formlayout : public QWidget {
     Q_OBJECT
     
 public:
-	formlayout();
-	~formlayout();
-	QFormLayout *getLayout();
-	QLineEdit *getSizeEdit();
-	QLineEdit *getStartMovesEdit();
-	QLineEdit *getRandomSeedEdit();
+	formlayout(); /** Default Constructor */
+	~formlayout(); /** Default Destructor */
+	QFormLayout *getLayout(); /** Layout Accessor */
+	QLineEdit *getSizeEdit(); /** Size Edit Accessor */
+	QLineEdit *getStartMovesEdit(); /** StartMovesEdit Accessor */
+	QLineEdit *getRandomSeedEdit(); /** RandomSeedEdit Accessor*/
 	
 private:
-	QFormLayout *layout;
-	QLineEdit *sizeEdit;
-	QLineEdit *startMovesEdit;
-	QLineEdit *randomSeedEdit;
+	QFormLayout *layout; /** Your layout */
+	QLineEdit *sizeEdit; /** To store what was written in size edit */
+	QLineEdit *startMovesEdit; /** To Store what was written in startMoves Edit */
+	QLineEdit *randomSeedEdit; /** To store what was written in randomseed edit */
 
 public slots:
 

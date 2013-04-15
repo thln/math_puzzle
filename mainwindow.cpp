@@ -13,11 +13,10 @@
 
 using namespace std;
 
-//MainWindow now
+/** Default Constructor */
 MainWindow::MainWindow()
 {
 	gw = new GraphicsWindow;
-//	gw->setSceneRect(0, 0, 800, 800);
 	setCentralWidget(gw);
 
 //---------------------------------------------------------------
@@ -37,7 +36,6 @@ MainWindow::MainWindow()
 	tool->addAction( quitGameAction );
 	connect( quitGameAction, SIGNAL(triggered() ), this, SLOT(quitGame() ));
 
-//tool->show();
 //---------------------------------------------------------------
 //Radio Buttons between Heuristics
 	mhChoice = new QRadioButton(tr("&Manhattan Heuristic"), this);
@@ -49,7 +47,6 @@ MainWindow::MainWindow()
 	mhChoice->setChecked(false);
 	ooohChoice->setChecked(false);
 
-	//horlayout = new QHBoxLayout();
 	tool->addWidget(mhChoice);
 	tool->addWidget(ooohChoice);
 
@@ -86,19 +83,17 @@ MainWindow::MainWindow()
 
 }
 
+/** Default Destructor */
 MainWindow::~MainWindow()
 {
 	delete gw;
 
 }
 
+/** Slot to start game */
 void MainWindow::startGame()
 {
 
-//	delete gw;
-//	gw = new GraphicsWindow;
-//	setCentralWidget(gw);
-	
 
 //Takes inputs from lineedits and store them in respective values
 	size = textfields->getSizeEdit()->text().toInt();
@@ -113,17 +108,14 @@ void MainWindow::startGame()
 	if(randMoves <= 0)
 	{
 		tempOutput->appendPlainText("Error: Needs a Start Move value greater than 0.");
-	//	return 0;
 	}
 	else if(randSeed <= 0)
 	{
 		tempOutput->appendPlainText("Error: Needs a Random Seed value greater than 0.");
-	//	return 0;
 	}
 	else if(size != 9 && size != 16)
 	{
 		tempOutput->appendPlainText("Error: Size can only be of 3x3(9) or 4x4(16).");
-	//	return 0;
 	}
 	else
 	{
@@ -136,7 +128,6 @@ void MainWindow::startGame()
   		QBrush yellowBrush(Qt::yellow);
   		int index = 0;
   			srand(randSeed);
-//  		tempOutput->appendPlainText("DIM: "+ QString::number(dim));
  
 //making the tiles 		
 		for(int i=0; i<dim; i++)
@@ -147,51 +138,23 @@ void MainWindow::startGame()
 			
 			if(gw->getBoard()->getTiles()[index] != 0)
 			{
-			//supposed to be -> ?
 				gw->getTilesAt(index)->setBrush(blueBrush);
 				gw->getTilesAt(index)->setPen(blackPen);
 			}
 			else
 			{
-			//	gw->getTilesAt(index)->setBrush(whiteBrush);
 				gw->getTilesAt(index)->setBrush(yellowBrush);
 				gw->getTilesAt(index)->setPen(blackPen);			
 			}
 			gw->getScene()->addItem(gw->getTiles()[index]);
-//			gw->getScene()->addItem(tiles[index]);
 			index++;
-//			tempOutput->appendPlainText(QString::number(index));
 			}
-//		tempOutput->appendPlainText(QString::number(index));
 		}
-
-//	for(int i=0; i<size; i++)
-//	{
-//	tempOutput->appendPlainText(QString::number(gw->getTilesAt(i)->getValue()));
-//	tempOutput->appendPlainText("X Coordinate: " + QString::number(gw->getTilesAt(i)->getxCord()));
-//	tempOutput->appendPlainText("Y Coordinate: " + QString::number(gw->getTilesAt(i)->getyCord()));
-//	}
 
 	}
 }
 
-/*
-GUITiles* MainWindow::getTiles()
-{
-	return tiles[];
-}
-
-Board* MainWindow::getBoard()
-{
-	return b;
-}
-
-int MainWindow::getSize()
-{
-	return size;
-}
-*/
-
+/** Slot to start cheating on game */
 void MainWindow::cheatGame()
 {
 	if(mhChoice->isChecked())
@@ -230,11 +193,13 @@ void MainWindow::cheatGame()
 
 }
 
+/** Slot to quit game */
 void MainWindow::quitGame()
 {
 	exit(EXIT_FAILURE);
 }
 
+/** Slot to check if clicked */
 bool MainWindow::clickedstate()
 {
 	return false;

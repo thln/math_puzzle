@@ -4,24 +4,17 @@
 #include <stdlib.h>
 #include <time.h>
 
+/** Nothing */
 void GraphicsWindow::handleTimer() {
-//  item->move(WINDOW_MAX_X, WINDOW_MAX_Y);
-//    counter++;
 }
 
 //clicking will make the timer stop or start
+/** Nothing */
 void GraphicsWindow::clicker()
 {
-//	if(timer->isActive())
-//	{
-//		timer->stop();
-//	}
-//	else if(!timer->isActive())
-//	{
-//		timer->start();
-//	}
 }
 
+/** Default Constructor*/
 GraphicsWindow::GraphicsWindow()  {
     //We need a scene and a view to do graphics in QT
     scene = new QGraphicsScene();
@@ -39,21 +32,26 @@ GraphicsWindow::GraphicsWindow()  {
   	
 }
 
-
+/** Show
+	* Displays the graphicsWindow */
 void GraphicsWindow::show() {
     //This is only called once by main. Timers don't start working until
     //we call start
-//    timer->start();
+	//timer->start();
 
     //This is how we get our view displayed.
     this->show();
 }
 
+/** getScene
+	* Scene Accessor */
 QGraphicsScene *GraphicsWindow::getScene()
 {
 	return scene;
 }
 
+/** moveTile
+	* @param piece1 The GUITile being moved */
 void GraphicsWindow::moveTile(GUITile* piece1)
 {
 if(!b->solved())
@@ -63,7 +61,6 @@ if(!b->solved())
 	int tempX = piece1->getxCord();
 	int tempY = piece1->getyCord();
 	int zero_index = 0;
-//	int piece_index = 0;
 
    int value_ = piece1->getValue();
    b->move(value_);
@@ -76,45 +73,7 @@ if(!b->solved())
 			zeroY = tiles[j]->getyCord();
 			zero_index = j;
 		}
-	}
-
-
-
-/*	
-	for(int j=0; j< b->getSize(); j++)
-	{
-		if(tiles[j]->getValue() == value_)
-		{
-			piece_index = j;
-		}
-	}
-
-
-	
-	int xDiff = tempX-zeroX;
-	int yDiff = tempY-zeroY;
-	if( (xDiff==0 && yDiff==100) || (xDiff==0 && yDiff==-100) || (xDiff==100 && yDiff==0) || (xDiff==-100 && yDiff==0))
-	{
-			tiles[zero_index]->setPos(tempX, tempY);
-			tiles[zero_index]->setxCord(tempX);
-			tiles[zero_index]->setyCord(tempY);
-			//tiles[zero_index]->update(tempX, tempY, 100, 100);
-			piece1->setPos(zeroX, zeroY);	
-			//piece1->update(tempX, tempY, 100, 100);
-			piece1->setxCord(tempX);
-			piece1->setyCord(tempY);
-			
-			GUITile *temp;
-			temp = tiles[zero_index];
-			tiles[zero_index] = tiles[piece_index];
-			tiles[piece_index] = temp;
-			
-//			scene->addItem(piece1);
-//			scene->addItem(tiles[zero_index]);
-	} 
-*/	
-	
-	
+	}	
 	
 	if(tempX == zeroX || tempY == zeroY)
 	{
@@ -130,12 +89,10 @@ if(!b->solved())
 			piece1->setxCord(zeroX);
 			piece1->setyCord(zeroY);
 
-			
-//			GUITile *temp;
-//			temp = tiles[zero_index];
-//			tiles[zero_index] = tiles[piece_index];
-//			tiles[piece_index] = temp;
-			
+//			QPointF p(zeroX, zeroY);
+//			QRectF r(piece1);
+//			r.moveTo(p);
+//			setRect( r );
 		}
 		
 		else if((tempY+100) == zeroY || (tempY-100) == zeroY)
@@ -150,12 +107,6 @@ if(!b->solved())
 			piece1->setxCord(zeroX);
 			piece1->setyCord(zeroY);
 
-			
-//			GUITile *temp;
-//			temp = tiles[zero_index];
-//			tiles[zero_index] = tiles[piece_index];
-//			tiles[piece_index] = temp;
-				
 		}
 	
 	}
@@ -166,65 +117,59 @@ if(!b->solved())
 	tempX = 0;
 	tempY = 0;
 	zero_index = 0;
-//	piece_index = 0;
 }
+
 if (b->solved())
 {
 	QMessageBox messagebox;
-//	messagebox.setText( "&Congratulations! You have won the game.");
 	messagebox.about(0, "Congratulations!", "You have won the game.");
 	messagebox.setFixedSize(500,200);
 }
 
 }
 
+/** getTiles
+	* @return tiles Returns Array of tiles */
 GUITile** GraphicsWindow::getTiles()
 {
 	return tiles;
 }
 
+/** getTilesAt
+	* @param index The index of the array being accessed
+	* @return tiles[index] The tile you want to access */
 GUITile* GraphicsWindow::getTilesAt(int index)
 {
 	return tiles[index];
 }
 
+/** getBoard
+	* @return b Returns your gameboard */
 Board* GraphicsWindow::getBoard()
 {
 	return b;
 }
 
+/** setBoard
+	* @param *b_ The Board you want to set your game to*/
 void GraphicsWindow::setBoard(Board *b_)
 {
 	b = b_;
 }
 
+/** setTilesAt
+	* @param index The index of the GUITile in the array
+	* @param *piece The GUITile being set to in the array */
 void GraphicsWindow::setTilesAt(int index, GUITile *piece)
 {
 	tiles[index] = piece;
 }
 
-/*
-int GraphicsWindow::getSize()
-{
-	return size;
-}
-
-int GraphicsWindow::getRandMoves()
-{
-	return randMoves;
-}
-
-int GraphicsWindow::getRandSeed()
-{
-	return randSeed;
-}
-*/
-
+/** Destructor */
 GraphicsWindow::~GraphicsWindow()
 {
     timer->stop();
     delete timer;
-//    delete item;
     delete scene;
 }
 

@@ -8,6 +8,7 @@
 
 using namespace std;
 
+/** Default Constructor */
 formlayout::formlayout()
 {
 	layout = new QFormLayout();
@@ -23,26 +24,36 @@ formlayout::formlayout()
 
 }
 
+/** getLayout
+	* @return layout The layout being returned */
 QFormLayout *formlayout::getLayout()
 {
 	return layout;
 }
-	
+
+/** getSizeEdit
+	* @return sizeEdit The input of the size line */
 QLineEdit *formlayout::getSizeEdit()
 {
 	return sizeEdit;
 }
 
+/** getStartMovesedit
+	* @return startMovesEdit The input of the startmoves line */
 QLineEdit *formlayout::getStartMovesEdit()
 {
 	return startMovesEdit;
 }
 
+/** getRandomSeededit
+	* @return randomSeedEdit The input of the RandomSeed line */
 QLineEdit *formlayout::getRandomSeedEdit()
 {
 	return randomSeedEdit;
 }
 
+
+/** Default Destructor */
 formlayout::~formlayout()
 {
 
