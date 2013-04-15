@@ -99,7 +99,7 @@ if(!b->solved())
 			tiles[zero_index]->setPos(tempX, tempY);
 			tiles[zero_index]->setxCord(tempX);
 			tiles[zero_index]->setyCord(tempY);
-
+   
 //			QPointF p(zeroX, zeroY);
 //			QRectF r(piece1);
 //			r.moveTo(p);
