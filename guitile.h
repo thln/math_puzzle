@@ -27,31 +27,33 @@ public:
 	~GUITile(); /** Destructor */
 	void mousePressEvent(QGraphicsSceneMouseEvent* event); /** when tile is clicked on*/
 	int getValue(); /** Value accessor */
-	int getxCord(); /** X Coordinate Accessor */
-	int getyCord(); /** Y Coordinate Accessor */
+	double getxCord(); /** X Coordinate Accessor */
+	double getyCord(); /** Y Coordinate Accessor */
 	int getWidth(); /** Width Accessor*/
 	int getHeight(); /** Height Accessor */
+	QTimer *getTimer();
 	void setxCord(double x); /** X Coordinate Resetter */
 	void setyCord(double y); /** Y Coordinate Resetter */	
-	QTimer *timer; /** Timer */
 	
 	void setVelocityX(double vx);
 	void setVelocityY(double vy);
-	void setDestinationX( int dx);
-	void setDestinationY( int dy);
+	void setDestinationX(double dx);
+	void setDestinationY(double dy);
 
 private:
 	GraphicsWindow *parent; /** Pointer to the window the element is in*/
 	QGraphicsSimpleTextItem* numbers; /** The Graphical display of the number */
 	int value; /** what number is the guitile*/
-	int xCord; /** the upper left x coordinate of the tile*/
-	int yCord; /** the upper left y coordinate of the tile*/
+	double xCord; /** the upper left x coordinate of the tile*/
+	double yCord; /** the upper left y coordinate of the tile*/
 	int width; /** the width of the tile*/
 	int height; /** the height of the tile*/
 	double velocityX;
 	double velocityY;
-	int destinationX;
-	int destinationY;
+	double destinationX;
+	double destinationY;
+	int counter;
+	QTimer *timer; /** Timer */
 	QGraphicsSceneMouseEvent* event; /** to handle the event */
 
 public slots:

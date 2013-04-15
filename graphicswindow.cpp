@@ -6,6 +6,14 @@
 
 /** Nothing */
 void GraphicsWindow::handleTimer() {
+
+counter++;
+
+if(counter == 100)
+{
+	timer->stop();
+}
+
 }
 
 //clicking will make the timer stop or start
@@ -82,19 +90,20 @@ if(!b->solved())
 
 
 //			piece1->setPos(zeroX, zeroY);	
-//			piece1->setxCord(zeroX);
-//			piece1->setyCord(zeroY);
+	//		piece1->setxCord(zeroX);
+		//	piece1->setyCord(zeroY);
 
 
 			piece1->setDestinationX(zeroX);
 			piece1->setDestinationY(zeroY);
-			piece1->setVelocityX((zeroX-tempX)/100);
-			piece1->setVelocityY(0);
-			piece1->timer->start();
+			piece1->setVelocityX((zeroX-tempX)/10);
+			piece1->setVelocityY((zeroY-tempY)/10);
+			piece1->getTimer()->start();
 //			piece1->moveTilesAnimate();
 
-			piece1->setxCord(zeroX);
-			piece1->setyCord(zeroY);
+//		piece1->setxCord(zeroX);
+//		piece1->setyCord(zeroY);
+
 
 			tiles[zero_index]->setPos(tempX, tempY);
 			tiles[zero_index]->setxCord(tempX);
@@ -113,15 +122,54 @@ if(!b->solved())
 //			piece1->setxCord(zeroX);
 //			piece1->setyCord(zeroY);
 
+
 			piece1->setDestinationX(zeroX);
 			piece1->setDestinationY(zeroY);
-			piece1->setVelocityY((zeroY-tempY)/100);
-			piece1->setVelocityX(0);
-			piece1->timer->start();
+			piece1->setVelocityY((zeroY-tempY)/10);
+			piece1->setVelocityX((zeroX-tempX)/10);
+			piece1->getTimer()->start();
+
+/*
+			timer = new QTimer(this);
+			timer->setInterval(1);
+//			connect(timer, SIGNAL(timeout()), this, SLOT(handletimer()));
+			timer->start();
+			while (true)
+				{
+					if((tempY+100) == zeroY)
+					{
+			 			piece1->setPos(tempX, tempY+1);
+			 		}
+					if((tempY-100) == zeroY)
+					{
+						piece1->setPos(tempX, tempY-1);				
+					}
+				counter++;
+				if(counter == 100)
+				{
+					timer->stop();
+					break;
+				}
+			}
+
+//			piece1->getTimer()->start();
 //			piece1->moveTilesAnimate();
 
-			piece1->setxCord(zeroX);
-			piece1->setyCord(zeroY);
+			for(int i=0; i<100; i++)
+			{
+				if((tempY+100) == zeroY)
+				{
+					piece1->setPos(tempX+i, tempY);
+				}
+				else if((tempY-100) == zeroY)
+				{
+					piece1->setPos(tempX-i, tempY);				
+				}
+				wait(1);
+			}
+*/
+//			piece1->setxCord(zeroX);
+//			piece1->setyCord(zeroY);
 
 			tiles[zero_index]->setPos(tempX, tempY);
 			tiles[zero_index]->setxCord(tempX);

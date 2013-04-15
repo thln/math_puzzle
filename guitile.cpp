@@ -64,14 +64,14 @@ int GUITile::getValue()
 
 /** XCord Accessor
 	* @return xCord returns the upper left x Coordinate of the guitile */
-int GUITile::getxCord()
+double GUITile::getxCord()
 {
 	return xCord;
 }
 
 /** yCord Accessor
 	* @return yCord returns the upper left y Coordinate of the guitile */
-int GUITile::getyCord()
+double GUITile::getyCord()
 {
 	return yCord;
 }
@@ -88,6 +88,13 @@ int GUITile::getWidth()
 int GUITile::getHeight()
 {
 	return height;
+}
+
+/** Timer Accessor
+	* @return timer Returns the timer */
+QTimer *GUITile::getTimer()
+{
+	return timer;
 }
 
 /** XCord Resetter
@@ -120,14 +127,14 @@ void GUITile::setVelocityY(double vy)
 
 /** Destination X Resetter
 	* @param dx The New x coordinate Destination you want to set */
-void GUITile::setDestinationX( int dx)
+void GUITile::setDestinationX(double dx)
 {
 	destinationX = dx;
 }
 
 /** Destination Y Resetter
 	* @param dy The New x coordinate Destination you want to set */
-void GUITile::setDestinationY( int dy)
+void GUITile::setDestinationY(double dy)
 {
 	destinationY = dy;
 }
@@ -146,10 +153,28 @@ void GUITile::mousePressEvent(QGraphicsSceneMouseEvent* event)
 	*Animates the tile */
 void GUITile::moveTilesAnimate()
 {
-	setPos(xCord+velocityX, yCord+velocityY);
-	
+counter++;
+	if(counter%10 == 0)
+	{
+	xCord += velocityX;
+	yCord += velocityY;
+	setPos(xCord, yCord);
+//	setPos(xCord+velocityX, yCord+velocityY);	
+	}	
 	if(xCord == destinationX && yCord==destinationY)
 	{
 	timer->stop();
 	}
+
+
+/*
+	while(!(xCord == destinationX && yCord==destinationY))
+	{
+	setPos(xCord, yCord);
+	xCord+=velocityX;
+	yCord+=velocityY;
+	}
+	timer->stop();
+*/
 }
+
