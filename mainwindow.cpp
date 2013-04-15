@@ -41,11 +41,9 @@ MainWindow::MainWindow()
 //Radio Buttons between Heuristics
 	mhChoice = new QRadioButton(tr("&Manhattan Heuristic"), this);
 	connect(mhChoice, SIGNAL(clicked(bool)), this, SLOT(clickedstate()));
-	mhChoice->setAutoExclusive(false);
 
 	ooohChoice = new QRadioButton(tr("&Out Of Order Heuristic"), this);
 	connect( ooohChoice, SIGNAL(clicked(bool)), this, SLOT(clickedstate()));
-	ooohChoice->setAutoExclusive(false);
 
 	mhChoice->setChecked(false);
 	ooohChoice->setChecked(false);
@@ -195,6 +193,23 @@ int MainWindow::getSize()
 
 void MainWindow::cheatGame()
 {
+	if(mhChoice->isChecked())
+	{
+		tempOutput->appendPlainText("Manhattan Cheat!");
+	}
+	else if(ooohChoice->isChecked())
+	{
+		tempOutput->appendPlainText("Out of Order Cheat!");
+	}
+	else if(size != 9 && size != 16)
+	{
+		tempOutput->appendPlainText("Please start the game first.");
+	}
+	else
+	{
+		tempOutput->appendPlainText("Please choose a cheat first.");
+	}
+
 
 }
 

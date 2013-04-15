@@ -75,7 +75,10 @@ void GraphicsWindow::moveTile(GUITile* piece1)
 			zero_index = j;
 		}
 	}
-	
+
+
+
+/*	
 	for(int j=0; j< b->getSize(); j++)
 	{
 		if(tiles[j]->getValue() == value_)
@@ -83,7 +86,9 @@ void GraphicsWindow::moveTile(GUITile* piece1)
 			piece_index = j;
 		}
 	}
-/*	
+
+
+	
 	int xDiff = tempX-zeroX;
 	int yDiff = tempY-zeroY;
 	if( (xDiff==0 && yDiff==100) || (xDiff==0 && yDiff==-100) || (xDiff==100 && yDiff==0) || (xDiff==-100 && yDiff==0))
@@ -133,8 +138,7 @@ void GraphicsWindow::moveTile(GUITile* piece1)
 		
 		else if((tempY+100) == zeroY || (tempY-100) == zeroY)
 		{
-		QBrush redBrush(Qt::red);
-		QBrush greenBrush(Qt::green);
+
 			tiles[zero_index]->setPos(tempX, tempY);
 			tiles[zero_index]->setxCord(tempX);
 			tiles[zero_index]->setyCord(tempY);
