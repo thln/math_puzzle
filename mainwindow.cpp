@@ -17,6 +17,7 @@ using namespace std;
 MainWindow::MainWindow()
 {
 	gw = new GraphicsWindow;
+//	gw->setSceneRect(0, 0, 800, 800);
 	setCentralWidget(gw);
 
 //---------------------------------------------------------------

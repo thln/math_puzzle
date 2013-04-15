@@ -56,12 +56,14 @@ QGraphicsScene *GraphicsWindow::getScene()
 
 void GraphicsWindow::moveTile(GUITile* piece1)
 {
+if(!b->solved())
+{
 	int zeroX = 0;
 	int zeroY = 0;
 	int tempX = piece1->getxCord();
 	int tempY = piece1->getyCord();
 	int zero_index = 0;
-	int piece_index = 0;
+//	int piece_index = 0;
 
    int value_ = piece1->getValue();
    b->move(value_);
@@ -164,7 +166,15 @@ void GraphicsWindow::moveTile(GUITile* piece1)
 	tempX = 0;
 	tempY = 0;
 	zero_index = 0;
-	piece_index = 0;
+//	piece_index = 0;
+}
+if (b->solved())
+{
+	QMessageBox messagebox;
+//	messagebox.setText( "&Congratulations! You have won the game.");
+	messagebox.about(0, "Congratulations!", "You have won the game.");
+	messagebox.setFixedSize(500,200);
+}
 
 }
 

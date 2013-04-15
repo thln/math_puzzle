@@ -15,6 +15,7 @@
 #include <QDockWidget>
 #include <QLabel>
 #include <QGraphicsRectItem>
+#include <QMessageBox>
 #include "guitile.h"
 #include "board.h"
 
@@ -51,11 +52,6 @@ private:
 //	int randMoves;
 //	int randSeed;
 	
-//    QGraphicsRectItem *box1;
-//    QGraphicsRectItem *box2;
-//    QGraphicsRectItem *box3;
-//    QGraphicsRectItem *box4;    
-    
     	QPushButton *buttonclick;
     	int counter;
 
